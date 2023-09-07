@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-interface User {
+interface IUser {
   id: number;
   name: string;
   email: string;
@@ -9,10 +9,15 @@ interface User {
 }
 
 export const useUserStore = defineStore('user', () => {
-  const user = ref<User>();
+  const user = ref<IUser>();
+  // const user = ref<IUser>({
+  //   id: 1,
+  //   name: 'Tiago Ribeiro',
+  //   email: 'random@email.com',
+  //   picture: 'https://avatars.githubusercontent.com/u/92998482?v=4',
+  // });
 
-  const getUser = async (): Promise<User | undefined | boolean> => {
-    console.log(user);
+  const getUser = async (): Promise<IUser | undefined> => {
     return user.value;
   };
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/assets/logo.png';
 import SignButton from '@/components/SignButton.vue';
-import ThemeButton from '@/components/ThemeSwitcher/ThemeButton.vue';
+import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
 import { RouterLink } from 'vue-router';
 
 const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -10,7 +10,7 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 <template>
   <nav class="fixed top-0 z-50 w-full backdrop-filter backdrop-blur-lg">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
-      <RouterLink :to="{ name: 'home' }" class="flex flex-row" @click="scrollTop()">
+      <RouterLink :to="{ name: 'Home' }" class="flex flex-row" @click="scrollTop()">
         <img :src="Logo" alt="Easy Wallet" width="32" height="32" />
         <span class="self-center mt-1 ml-2 text-2xl whitespace-nowrap hover:text-quaternaryColor">
           Easy Wallet
@@ -18,7 +18,7 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
       </RouterLink>
 
       <div className="relative flex items-center">
-        <ThemeButton />
+        <ThemeSwitcher class="justify-center" />
         <SignButton class="ml-3 bg-senaryColor dark:bg-primaryColor" hideTextOnMobile />
       </div>
     </div>
