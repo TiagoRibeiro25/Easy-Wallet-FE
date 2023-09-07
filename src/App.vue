@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
 import FooterLayout from './components/FooterLayout.vue';
 import NavBar from './components/Navbar/NavBar.vue';
+import LoadingFallback from './views/LoadingFallback.vue';
 </script>
 
 <template>
@@ -10,7 +10,13 @@ import NavBar from './components/Navbar/NavBar.vue';
   </header>
 
   <main class="max-w-screen-xl min-h-[calc(100vh-56px)] mx-auto grow h-fit pt-28 px-4">
-    <RouterView />
+    <Suspense>
+      <RouterView />
+
+      <template #fallback>
+        <LoadingFallback />
+      </template>
+    </Suspense>
   </main>
   <FooterLayout />
 </template>
