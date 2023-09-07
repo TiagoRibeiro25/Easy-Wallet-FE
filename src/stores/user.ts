@@ -13,9 +13,7 @@ export const useUserStore = defineStore('user', () => {
 
   const getUser = async (): Promise<User | undefined | boolean> => {
     console.log(user);
-    // return user.value;
-
-    return true;
+    return user.value;
   };
 
   return { getUser };
