@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router';
           <span>
             The source code is available on
             <a
-              href="#"
+              href="https://github.com/TiagoRibeiro25/Easy-Wallet-FE"
               target="_blank"
               rel="noopener noreferrer"
               class="mx-1 text-quaternaryColor hover:underline"
