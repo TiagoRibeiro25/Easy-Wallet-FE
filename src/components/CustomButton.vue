@@ -4,7 +4,7 @@ interface IProps {
   name: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  icon?: string;
+  icon?: any;
   iconPosition?: 'left' | 'right';
 }
 
@@ -16,10 +16,12 @@ const props = defineProps<IProps>();
     :id="props.id || props.name"
     :type="props.type || 'button'"
     :disabled="props.disabled || false"
-    :class="`flex items-center justify-center px-4 py-2 text-lg font-semibold text-quinaryColor transition duration-200 ease-in-out rounded-md shadow-sm bg-quaternaryColor hover:bg-opacity-90 focus:outline-none ${
-      props.iconPosition === 'left' ? 'space-x-2' : 'space-x-reverse'
-    }`"
+    class="flex items-center justify-center px-4 py-2 text-lg font-semibold transition duration-200 ease-in-out rounded-md shadow-sm text-quinaryColor bg-quaternaryColor hover:bg-opacity-90 focus:outline-none"
   >
-    <slot name="default"></slot>
+    <div class="flex items-center">
+      <slot v-if="props.iconPosition !== 'left'" name="default"></slot>
+      <props.icon :class="props.iconPosition === 'left' ? 'mr-1' : 'ml-1'" />
+      <slot v-if="props.iconPosition === 'left'" name="default"></slot>
+    </div>
   </button>
 </template>
