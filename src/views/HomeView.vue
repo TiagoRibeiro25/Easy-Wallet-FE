@@ -14,11 +14,11 @@ import HeroIllustration from '@/components/Illustrations/hero-illustration.vue';
         <br />
         Amplify Your Savings with EasyWallet
       </h1>
-      <CustomButton id="learn-more" name="learn-more" class="mt-8">
-        <template v-slot:default>
-          <a href="#what-is"> Learn More </a>
-        </template>
-      </CustomButton>
+      <a href="#what-is">
+        <CustomButton id="learn-more" name="learn-more" class="mt-8">
+          <template v-slot:default> Learn More </template>
+        </CustomButton>
+      </a>
     </div>
 
     <div class="flex items-center justify-center w-full p-16 md:p-5 md:w-1/2 md:h-full">
