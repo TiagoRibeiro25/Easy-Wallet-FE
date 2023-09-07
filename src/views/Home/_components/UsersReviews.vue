@@ -3,7 +3,7 @@ import StarIcon from '@/components/Icons/star-icon.vue';
 import { useDark } from '@vueuse/core';
 import UsersReviews from './users-reviews.json';
 
-interface Review {
+interface IReview {
   username: string;
   img: string;
   review: string;
@@ -11,7 +11,7 @@ interface Review {
 }
 
 const isDark = useDark();
-const reviews: Review[] = UsersReviews;
+const reviews: IReview[] = UsersReviews;
 </script>
 
 <template>
