@@ -61,7 +61,14 @@ const isDark = useDark();
       height="17.17729"
       :fill="isDark ? '#0F172A' : '#e6e6e6'"
     />
-    <rect x="121.4805" y="106.53877" width="17.17729" height="17.17729" fill="#e7b008" />
+    <rect
+      class="animate-pulse"
+      x="121.4805"
+      y="106.53877"
+      width="17.17729"
+      height="17.17729"
+      fill="#e7b008"
+    />
     <rect
       x="121.4805"
       y="134.2133"
@@ -104,7 +111,14 @@ const isDark = useDark();
       height="17.17728"
       :fill="isDark ? '#0F172A' : '#e6e6e6'"
     />
-    <rect x="121.4805" y="267.81207" width="17.17729" height="17.17728" fill="#e7b008" />
+    <rect
+      class="animate-pulse"
+      x="121.4805"
+      y="267.81207"
+      width="17.17729"
+      height="17.17728"
+      fill="#e7b008"
+    />
     <g class="animate-spin" :transform-origin="`357px 339px`" :style="{ animationDuration: '5s' }">
       <path
         d="M534.74755,435.76326a65.04556,65.04556,0,0,0-105.003-9.69992l-4.18616-3.65793a70.59368,70.59368,0,0,1,113.973,10.52622Z"

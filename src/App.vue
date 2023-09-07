@@ -9,7 +9,7 @@ import NavBar from './components/Navbar/NavBar.vue';
     <NavBar />
   </header>
 
-  <main class="max-w-screen-xl min-h-[calc(100vh-56px)] mx-auto grow h-fit pt-28">
+  <main class="max-w-screen-xl min-h-[calc(100vh-56px)] mx-auto grow h-fit pt-28 px-4">
     <RouterView />
   </main>
   <FooterLayout />

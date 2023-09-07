@@ -1,0 +1,44 @@
+[
+  {
+    "username": "johndoe87",
+    "img": "https://i.pravatar.cc/100?u=johndoe87",
+    "review": "EasyWallet has transformed how I manage my money. It's user-friendly and helped me get a grip on my spending. I'm more conscious of where my money is going now.",
+    "rating": 5
+  },
+  {
+    "username": "janedoe21",
+    "img": "https://i.pravatar.cc/100?u=janedoe17",
+    "review": "I've tried a few finance apps, but EasyWallet's simplicity won me over. I can track expenses on the go without any hassle. It's a must-have for anyone looking to budget effectively.",
+    "rating": 5
+  },
+  {
+    "username": "samsmith33",
+    "img": "https://i.pravatar.cc/100?u=samsmith33",
+    "review": "Easy Wallet's minimalist design makes budgeting a pleasure. I used to avoid tracking expenses, but now it's a breeze. This app has definitely improved my financial awareness.",
+    "rating": 4
+  },
+  {
+    "username": "emilybrown19",
+    "img": "https://i.pravatar.cc/100?u=emilybrown24",
+    "review": "Being financially organized was never my strong suit until I found Easy Wallet. It's helped me take control of my spending and plan for the future. Easy Wallet gets a thumbs up!",
+    "rating": 5
+  },
+  {
+    "username": "mikejones44",
+    "img": "https://i.pravatar.cc/100?u=mikejones25",
+    "review": "Easy Wallet's straightforward approach to expense tracking is refreshing. I no longer dread managing my finances. Now I can see where my money is going and adjust my habits.",
+    "rating": 3
+  },
+  {
+    "username": "laurasmith88",
+    "img": "https://i.pravatar.cc/100?u=laurasmith88",
+    "review": "I was skeptical about using another app, but Easy Wallet proved me wrong. It's easy to navigate and makes budgeting less overwhelming. Kudos to the team behind this!",
+    "rating": 4
+  },
+  {
+    "username": "alexwilson55",
+    "img": "https://i.pravatar.cc/100?u=axelwilson55",
+    "review": "Easy Wallet's simplicity is its strength. I can input expenses quickly and see a clear overview of my finances. It's become a valuable tool in my financial toolkit.",
+    "rating": 4
+  }
+]

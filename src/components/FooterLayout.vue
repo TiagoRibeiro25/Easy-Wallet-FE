@@ -36,7 +36,7 @@ import { RouterLink } from 'vue-router';
         </div>
       </div>
 
-      <div class="relative flex items-center mt-1 lg:mt-0">
+      <div class="relative flex items-center lg:mt-0">
         <RouterLink to="/privacy" class="hover:underline"> Privacy </RouterLink>
         <RouterLink to="/terms" class="ml-6 hover:underline"> Terms </RouterLink>
         <RouterLink to="/about" class="ml-6 hover:underline"> About </RouterLink>

@@ -8,7 +8,7 @@ const toggleDark = useToggle(isDark);
 
 <template>
   <button
-    class="flex items-center justify-center p-2 transition-all duration-200 ease-in-out border rounded-lg focus:outline-none border-septenaryColor dark:border-tertiaryColor dark:hover:bg-tertiaryColor hover:bg-septenaryColor"
+    class="flex items-center justify-center p-2 transition-all duration-200 ease-in-out border rounded-lg focus:outline-none border-septenaryColor dark:border-tertiaryColor dark:hover:bg-tertiaryColor hover:bg-septenaryColor bg-senaryColor dark:bg-primaryColor"
     @click="toggleDark()"
   >
     <ThemeIcon :theme="isDark ? 'dark' : 'light'" class="w-5 h-5" />
