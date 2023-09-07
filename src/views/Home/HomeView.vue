@@ -102,7 +102,7 @@ import UsersReviews from './_components/UsersReviews.vue';
     </p>
 
     <div class="flex justify-center mb-28">
-      <RouterLink :to="{ name: 'faq' }">
+      <RouterLink :to="{ name: 'Faq' }">
         <CustomButton id="faq" name="faq" class="mt-8">
           <template v-slot:default> Check FAQs </template>
         </CustomButton>
