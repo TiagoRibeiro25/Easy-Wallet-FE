@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CustomButton from '@/components/CustomButton.vue';
+import DownArrowIcon from '@/components/Icons/down-arrow-icon.vue';
 import HeroIllustration from '@/components/Illustrations/hero-illustration.vue';
 import WhatIsIllustration from '@/components/Illustrations/what-is-illustration.vue';
 import WhyUseIllustration from '@/components/Illustrations/why-use-illustration.vue';
@@ -20,7 +21,14 @@ import UsersReviews from './_components/UsersReviews.vue';
         Amplify Your Savings with Easy Wallet
       </h1>
       <a href="#what-is">
-        <CustomButton id="learn-more" name="learn-more" class="mt-8">
+        <CustomButton
+          id="learn-more"
+          name="learn-more"
+          class="mt-8"
+          :icon="DownArrowIcon"
+          iconPosition="right"
+          iconAlt="Down Arrow"
+        >
           <template v-slot:default> Learn More </template>
         </CustomButton>
       </a>
@@ -94,7 +102,7 @@ import UsersReviews from './_components/UsersReviews.vue';
     </p>
 
     <div class="flex justify-center mb-28">
-      <RouterLink to="/faq">
+      <RouterLink :to="{ name: 'faq' }">
         <CustomButton id="faq" name="faq" class="mt-8">
           <template v-slot:default> Check FAQs </template>
         </CustomButton>

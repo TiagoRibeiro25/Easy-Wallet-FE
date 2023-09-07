@@ -12,25 +12,25 @@ html {
   scroll-behavior: smooth;
 }
 
-body::-webkit-scrollbar {
+.wrapper::-webkit-scrollbar {
   width: 10px;
 }
-body::-moz-scrollbar {
+.wrapper::-moz-scrollbar {
   width: 10px;
 }
 
-body::-webkit-scrollbar-thumb {
+.wrapper::-webkit-scrollbar-thumb {
   background: #e7b008;
 }
-body::-moz-scrollbar-thumb {
+.wrapper::-moz-scrollbar-thumb {
   background: #e7b008;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+.wrapper::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
 
-body body::-moz-scrollbar-thumb:hover {
+.wrapper .wrapper::-moz-scrollbar-thumb:hover {
   background: #334155;
 }
 
@@ -39,15 +39,15 @@ body body::-moz-scrollbar-thumb:hover {
   color: #ffffff;
 }
 
-.dark body::-webkit-scrollbar-thumb {
+.dark .wrapper::-webkit-scrollbar-thumb {
   background: #334155;
 }
 
-.dark body::-moz-scrollbar-thumb {
+.dark .wrapper::-moz-scrollbar-thumb {
   background: #334155;
 }
 
-.dark body::-webkit-scrollbar-thumb:hover {
+.dark .wrapper::-webkit-scrollbar-thumb:hover {
   background: #e7b008;
 }
 
