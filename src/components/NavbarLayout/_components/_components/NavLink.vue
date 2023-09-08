@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 
 interface IProps {
   name: string;
-  icon: any;
+  icon?: any;
   route: { name: string; params?: { year: number } };
   customDarkBorder?: 'primary' | 'secondary';
 }
@@ -23,7 +23,7 @@ const darkBorder =
     <CustomButton
       :id="props.name.toLowerCase() + '-button'"
       :name="props.name.toLowerCase() + '-button'"
-      class="py-[4px] my-3 w-[200px] justify-start border text-base disabled:opacity-100"
+      class="py-[4px] my-3 w-[150px] sm:w-[200px] justify-center sm:justify-start border text-base disabled:opacity-100"
       :class="
         routeHook.name === props.route.name
           ? 'text-quinaryColor dark:border-quinaryColor bg-quaternaryColor'
@@ -34,7 +34,7 @@ const darkBorder =
       :disabled="routeHook.name === props.route.name"
     >
       <template v-slot:default>
-        <span class="ml-2 font-medium">{{ props.name }}</span>
+        <span class="font-medium sm:ml-2">{{ props.name }}</span>
       </template>
     </CustomButton>
   </RouterLink>
