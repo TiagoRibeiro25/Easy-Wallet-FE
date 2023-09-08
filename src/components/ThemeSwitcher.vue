@@ -18,6 +18,6 @@ const toggleDark = useToggle(isDark);
     @click="toggleDark()"
   >
     <ThemeIcon :theme="isDark ? 'dark' : 'light'" class="w-5 h-5" />
-    <span v-if="props.showText" class="ml-2 font-medium">{{ isDark ? 'Light' : 'Dark' }}</span>
+    <span v-if="props.showText" class="ml-2 font-medium">{{ isDark ? 'Dark' : 'Light' }}</span>
   </button>
 </template>

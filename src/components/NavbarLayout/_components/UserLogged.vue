@@ -64,7 +64,7 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     <CustomButton
       id="search-button"
       name="search-button"
-      class="py-1 my-10 w-[200px] justify-start bg-transparent border dark:border-septenaryColor dark:text-septenaryColor"
+      class="py-[4px] my-10 w-[200px] justify-start bg-transparent border dark:border-septenaryColor dark:text-septenaryColor"
       :icon="SearchIcon"
       icon-position="left"
     >
@@ -89,6 +89,7 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         name="Get Help"
         :icon="GetHelpIcon"
         :route="{ name: 'GetHelp' }"
+        custom-dark-border="secondary"
         @click="scrollTop()"
       />
 
@@ -101,6 +102,7 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         name="Settings"
         :icon="SettingsIcon"
         :route="{ name: 'Settings' }"
+        custom-dark-border="secondary"
         @click="scrollTop()"
       />
     </div>
