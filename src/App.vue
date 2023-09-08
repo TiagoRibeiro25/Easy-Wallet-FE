@@ -15,22 +15,23 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="flex" :class="{ 'flex-col': !isUserLogged, 'flex-row': isUserLogged }">
+  <div class="flex flex-col" :class="{ 'sm:flex-row': isUserLogged }">
     <NavbarLayout />
 
     <main
       class="flex flex-col w-full h-screen wrapper"
       :class="{ 'w-full pt-28': !isUserLogged, 'overflow-y-auto': isUserLogged }"
     >
-      <TopNavigation v-if="isUserLogged" />
+      <TopNavigation v-if="isUserLogged" class="hidden sm:block" />
 
       <div
         class="flex-col flex-grow w-full max-w-screen-xl px-4 mx-auto"
-        :class="{ 'pt-28 pb-16': isUserLogged }"
+        :class="{ 'sm:pt-28 pt-44 pb-16': isUserLogged }"
       >
         <Suspense>
           <RouterView />
 
+          <!-- TODO: Fix fallback not triggering when lazy loading the current view -->
           <template #fallback>
             <LoadingFallback />
           </template>

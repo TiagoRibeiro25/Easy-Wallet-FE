@@ -10,7 +10,8 @@ import PreviousYearsIcon from '@/components/Icons/previous-years-icon.vue';
 import SearchIcon from '@/components/Icons/search-icon.vue';
 import SettingsIcon from '@/components/Icons/settings-icon.vue';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
-import { RouterLink } from 'vue-router';
+import { computed } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
 import NavLink from './_components/NavLink.vue';
 
 interface INavigationLink {
@@ -48,11 +49,26 @@ const topNavigationLinks: INavigationLink[] = [
 ];
 
 const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+const getMobileNavTitle = computed(() => {
+  const routeHook = useRoute();
+
+  switch (routeHook.name) {
+    case 'Settings':
+      return 'Settings';
+    case 'GetHelp':
+      return 'Get Help';
+    default:
+      return 'Easy Wallet';
+  }
+});
 </script>
 
 <template>
+  <!-- Desktop Navbar -->
   <nav
-    class="w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto"
+    class="sm:flex hidden w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto"
+    aria-label="Main Desktop Navigation"
   >
     <RouterLink :to="{ name: 'Dashboard' }" class="flex flex-row" @click="scrollTop()">
       <img :src="Logo" alt="Easy Wallet" width="32" height="32" />
@@ -105,6 +121,36 @@ const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         custom-dark-border="secondary"
         @click="scrollTop()"
       />
+    </div>
+  </nav>
+
+  <!-- Mobile Navbar -->
+  <nav
+    class="fixed flex flex-col w-full sm:hidden h-[120px] border-b bg-senaryColor dark:bg-secondaryColor border-septenaryColor dark:border-tertiaryColor"
+    aria-label="Main Mobile Navigation"
+  >
+    <div class="flex flex-wrap items-center justify-between px-4 h-1/2">
+      <RouterLink :to="{ name: 'Settings' }">
+        <SettingsIcon class="w-11 h-11" />
+      </RouterLink>
+
+      <span class="self-center text-2xl"> {{ getMobileNavTitle }} </span>
+
+      <RouterLink :to="{ name: 'GetHelp' }">
+        <GetHelpIcon class="w-11 h-11" />
+      </RouterLink>
+    </div>
+    <div class="flex flex-row px-4 h-1/2">
+      <div class="flex flex-row justify-between w-full px-1 space-x-5 overflow-x-auto wrapper">
+        <NavLink
+          v-for="link in topNavigationLinks"
+          :key="link.name"
+          :name="link.name"
+          :route="link.route"
+          draggable="false"
+          @click="scrollTop()"
+        />
+      </div>
     </div>
   </nav>
 </template>
