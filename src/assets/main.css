@@ -14,9 +14,11 @@ html {
 
 .wrapper::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 .wrapper::-moz-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 .wrapper::-webkit-scrollbar-thumb {
