@@ -58,3 +58,18 @@ html {
   font-weight: normal;
   font-family: 'Roboto', sans-serif;
 }
+
+@media (max-width: 640px) {
+  .wrapper::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+  .wrapper::-moz-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  html {
+    font-size: 90%;
+  }
+}

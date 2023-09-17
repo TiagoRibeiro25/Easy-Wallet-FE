@@ -10,6 +10,7 @@ import PreviousYearsIcon from '@/components/Icons/previous-years-icon.vue';
 import SearchIcon from '@/components/Icons/search-icon.vue';
 import SettingsIcon from '@/components/Icons/settings-icon.vue';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
+import { isUserOnDesktop } from '@/lib/utils';
 import { computed } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import NavLink from './_components/NavLink.vue';
@@ -67,7 +68,8 @@ const getMobileNavTitle = computed(() => {
 <template>
   <!-- Desktop Navbar -->
   <nav
-    class="sm:flex hidden w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto"
+    class="hidden w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto"
+    :class="isUserOnDesktop() ? 'sm:flex' : ''"
     aria-label="Main Desktop Navigation"
   >
     <RouterLink :to="{ name: 'Dashboard' }" class="flex flex-row" @click="scrollTop()">
@@ -126,7 +128,8 @@ const getMobileNavTitle = computed(() => {
 
   <!-- Mobile Navbar -->
   <nav
-    class="fixed flex flex-col w-full sm:hidden h-[120px] border-b bg-senaryColor dark:bg-secondaryColor border-septenaryColor dark:border-tertiaryColor"
+    class="w-full fixed flex flex-col h-[120px] border-b bg-senaryColor dark:bg-secondaryColor border-septenaryColor dark:border-tertiaryColor"
+    :class="isUserOnDesktop() ? 'sm:hidden' : ''"
     aria-label="Main Mobile Navigation"
   >
     <div class="flex flex-wrap items-center justify-between px-4 h-1/2">
@@ -146,6 +149,7 @@ const getMobileNavTitle = computed(() => {
           v-for="link in topNavigationLinks"
           :key="link.name"
           :name="link.name"
+          :icon="link.icon"
           :route="link.route"
           draggable="false"
           @click="scrollTop()"

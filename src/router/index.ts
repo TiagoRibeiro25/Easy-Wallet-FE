@@ -18,6 +18,7 @@ const validateUser = async ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUs
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior: () => ({ top: 0, left: 0 }), // Scroll to the top every time the route changes
   routes: [
     {
       path: '/',
