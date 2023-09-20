@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Logo from '@/assets/logo.png';
 import CustomButton from '@/components/CustomButton.vue';
 import AddIcon from '@/components/Icons/add-icon.vue';
 import CalendarIcon from '@/components/Icons/calendar-icon.vue';
@@ -9,6 +8,7 @@ import GetHelpIcon from '@/components/Icons/get-help-icon.vue';
 import PreviousYearsIcon from '@/components/Icons/previous-years-icon.vue';
 import SearchIcon from '@/components/Icons/search-icon.vue';
 import SettingsIcon from '@/components/Icons/settings-icon.vue';
+import LogoName from '@/components/LogoName.vue';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
 import { isUserOnDesktop } from '@/lib/utils';
 import { computed } from 'vue';
@@ -49,8 +49,6 @@ const topNavigationLinks: INavigationLink[] = [
   },
 ];
 
-const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
 const getMobileNavTitle = computed(() => {
   const routeHook = useRoute();
 
@@ -72,12 +70,7 @@ const getMobileNavTitle = computed(() => {
     :class="isUserOnDesktop() ? 'sm:flex' : ''"
     aria-label="Main Desktop Navigation"
   >
-    <RouterLink :to="{ name: 'Dashboard' }" class="flex flex-row" @click="scrollTop()">
-      <img :src="Logo" alt="Easy Wallet" width="32" height="32" />
-      <span class="self-center mt-1 ml-2 text-2xl whitespace-nowrap hover:text-quaternaryColor">
-        Easy Wallet
-      </span>
-    </RouterLink>
+    <LogoName clickable />
 
     <CustomButton
       id="search-button"
@@ -98,7 +91,6 @@ const getMobileNavTitle = computed(() => {
         :name="link.name"
         :icon="link.icon"
         :route="link.route"
-        @click="scrollTop()"
       />
     </div>
 
@@ -108,7 +100,6 @@ const getMobileNavTitle = computed(() => {
         :icon="GetHelpIcon"
         :route="{ name: 'GetHelp' }"
         custom-dark-border="secondary"
-        @click="scrollTop()"
       />
 
       <ThemeSwitcher
@@ -121,7 +112,6 @@ const getMobileNavTitle = computed(() => {
         :icon="SettingsIcon"
         :route="{ name: 'Settings' }"
         custom-dark-border="secondary"
-        @click="scrollTop()"
       />
     </div>
   </nav>
@@ -152,7 +142,6 @@ const getMobileNavTitle = computed(() => {
           :icon="link.icon"
           :route="link.route"
           draggable="false"
-          @click="scrollTop()"
         />
       </div>
     </div>

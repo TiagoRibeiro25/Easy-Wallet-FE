@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import Logo from '@/assets/logo.png';
+import LogoName from '@/components/LogoName.vue';
 import SignButton from '@/components/SignButton.vue';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
-import { RouterLink } from 'vue-router';
-
-const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 </script>
 
 <template>
   <nav class="fixed top-0 z-50 w-full backdrop-filter backdrop-blur-lg">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-3 mx-auto">
-      <RouterLink :to="{ name: 'Home' }" class="flex flex-row" @click="scrollTop()">
-        <img :src="Logo" alt="Easy Wallet" width="32" height="32" />
-        <span class="self-center mt-1 ml-2 text-2xl whitespace-nowrap hover:text-quaternaryColor">
-          Easy Wallet
-        </span>
-      </RouterLink>
+      <LogoName clickable />
 
       <div className="relative flex items-center">
         <ThemeSwitcher class="justify-center" />
