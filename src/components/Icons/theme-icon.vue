@@ -1,7 +1,9 @@
 <script setup lang="ts">
-const props = defineProps({
-  theme: { type: String, required: true },
-});
+interface IProps {
+  theme: string;
+}
+
+const props = defineProps<IProps>();
 </script>
 
 <template>

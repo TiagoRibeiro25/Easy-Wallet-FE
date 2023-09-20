@@ -35,7 +35,7 @@ onBeforeMount(async () => {
   />
 
   <div v-else class="flex flex-col" :class="{ 'sm:flex-row': isUserLogged }">
-    <NavbarLayout />
+    <NavbarLayout :is-user-logged="isUserLogged" />
 
     <main
       class="flex flex-col w-full h-screen wrapper"

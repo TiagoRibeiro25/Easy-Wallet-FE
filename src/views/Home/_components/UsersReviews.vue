@@ -19,8 +19,8 @@ const reviews: IReview[] = UsersReviews;
     :duration="100"
     pauseOnHover
     gradient
-    :gradientColor="isDark ? [2, 8, 23] : [249, 250, 251]"
-    gradientLength="100px"
+    :gradient-color="isDark ? [2, 8, 23] : [249, 250, 251]"
+    gradient-length="100px"
   >
     <div
       v-for="(review, index) in reviews"
