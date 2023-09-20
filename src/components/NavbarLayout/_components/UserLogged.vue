@@ -124,13 +124,13 @@ const getMobileNavTitle = computed(() => {
   >
     <div class="flex flex-wrap items-center justify-between px-4 h-1/2">
       <RouterLink :to="{ name: 'Settings' }">
-        <SettingsIcon class="w-10 h-10" />
+        <SettingsIcon class="w-11 h-11" />
       </RouterLink>
 
       <span class="self-center text-2xl"> {{ getMobileNavTitle }} </span>
 
       <RouterLink :to="{ name: 'GetHelp' }">
-        <GetHelpIcon class="w-10 h-10" />
+        <GetHelpIcon class="w-11 h-11" />
       </RouterLink>
     </div>
     <div class="flex flex-row px-4 h-1/2">
