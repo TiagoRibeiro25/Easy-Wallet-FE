@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { useDark } from '@vueuse/core';
 import { onBeforeMount, ref } from 'vue';
 import FooterLayout from './components/FooterLayout.vue';
+import LoadingOverlay from './components/LoadingOverlay.vue';
 import NavbarLayout from './components/NavbarLayout/NavbarLayout.vue';
 import TopNavigation from './components/TopNavigation.vue';
 import { isUserOnDesktop, isUserOnMobile } from './lib/utils';
@@ -8,15 +10,31 @@ import { useUserStore } from './stores/user';
 import LoadingFallback from './views/LoadingFallback.vue';
 
 const userStore = useUserStore();
+const isLoading = ref(true);
+const errorOnLoading = ref(false);
 const isUserLogged = ref(false);
 
 onBeforeMount(async () => {
+  useDark(); // Add the dark class to the body (if the user has dark mode enabled)
+
   isUserLogged.value = !!(await userStore.getUser());
+
+  //TODO: Remove after adding the real API
+  setTimeout(() => {
+    errorOnLoading.value = false;
+    isLoading.value = false;
+  }, 3000);
 });
 </script>
 
 <template>
-  <div class="flex flex-col" :class="{ 'sm:flex-row': isUserLogged }">
+  <LoadingOverlay
+    v-if="isLoading || errorOnLoading"
+    class="wrapper"
+    :status="errorOnLoading ? 'error' : 'loading'"
+  />
+
+  <div v-else class="flex flex-col" :class="{ 'sm:flex-row': isUserLogged }">
     <NavbarLayout />
 
     <main
