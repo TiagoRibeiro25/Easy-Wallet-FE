@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router';
           <span>
             Built by
             <a
-              href="https://github.com/TiagoRibeiro25"
+              href="https://tiagoribeiro.tech"
               target="_blank"
               rel="noopener noreferrer"
               class="mx-1 text-quaternaryColor hover:underline"
