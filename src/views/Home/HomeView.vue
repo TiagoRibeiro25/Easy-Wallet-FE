@@ -13,7 +13,7 @@ import UsersReviews from './_components/UsersReviews.vue';
   <div>
     <section
       id="hero"
-      class="flex flex-col md:flex-row items-center justify-center min-h-[680px] md:min-h-[500px] h-[calc(100vh-4rem)]"
+      class="flex flex-col md:flex-row items-center justify-center min-h-[680px] md:min-h-[500px] lg:min-h-[600px] xl:min-h-[700px]"
     >
       <div class="flex flex-col items-center justify-center mb-10 md:w-1/2 md:h-full">
         <h1 class="text-3xl text-center">
