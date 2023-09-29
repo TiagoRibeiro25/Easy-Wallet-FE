@@ -1,28 +1,24 @@
+import type { IUser } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-
-interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  picture: string;
-}
+import requests from '../api/requests/index';
 
 export const useUserStore = defineStore('user', () => {
   const user = ref<IUser>();
 
+  // Get the logged user (if any)
   const getUser = async (): Promise<IUser | undefined> => {
+    if (!user.value) {
+      try {
+        const response = await requests.user.getLoggedUser();
+        user.value = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     return user.value;
   };
 
-  const updateUser = (): void => {
-    user.value = {
-      id: 1,
-      name: 'Tiago Ribeiro',
-      email: 'random@email.com',
-      picture: 'https://avatars.githubusercontent.com/u/92998482?v=4',
-    };
-  };
-
-  return { getUser, updateUser };
+  return { getUser };
 });

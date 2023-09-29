@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core';
 import { ref, watchEffect } from 'vue';
+import requests from './api/requests';
 import FooterLayout from './components/FooterLayout.vue';
 import LoadingOverlay from './components/LoadingOverlay.vue';
 import NavbarLayout from './components/NavbarLayout/NavbarLayout.vue';
@@ -17,19 +18,25 @@ const isUserLogged = ref(false);
 watchEffect(() => {
   useDark(); // Add the dark class to the body (if the user has dark mode enabled)
 
-  userStore
-    .getUser()
-    .then(user => {
-      isUserLogged.value = !!user;
-
-      errorOnLoading.value = false;
-    })
-    .catch(() => {
+  requests.ping().then(result => {
+    if (result !== 'pong') {
       errorOnLoading.value = true;
-    })
-    .finally(() => {
       isLoading.value = false;
-    });
+    } else {
+      userStore
+        .getUser()
+        .then(user => {
+          isUserLogged.value = !!user;
+          errorOnLoading.value = false;
+        })
+        .catch(() => {
+          errorOnLoading.value = true;
+        })
+        .finally(() => {
+          isLoading.value = false;
+        });
+    }
+  });
 });
 </script>
 
