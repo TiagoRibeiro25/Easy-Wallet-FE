@@ -6,6 +6,10 @@ import requests from '../api/requests/index';
 export const useUserStore = defineStore('user', () => {
   const user = ref<IUser>();
 
+  const isUserLoggedIn = (): boolean => {
+    return !!user.value;
+  };
+
   // Get the logged user (if any)
   const getUser = async (): Promise<IUser | undefined> => {
     if (!user.value) {
@@ -20,5 +24,5 @@ export const useUserStore = defineStore('user', () => {
     return user.value;
   };
 
-  return { getUser };
+  return { isUserLoggedIn, getUser };
 });

@@ -9,7 +9,7 @@ interface IValidateUserProps {
 
 const validateUser = async ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProps) => {
   const userStore = useUserStore();
-  const isUserLoggedIn = !!(await userStore.getUser());
+  const isUserLoggedIn = userStore.isUserLoggedIn();
 
   if (mustBeLoggedIn && !isUserLoggedIn) next({ name: fallbackRoute });
   else if (!mustBeLoggedIn && isUserLoggedIn) next({ name: fallbackRoute });
