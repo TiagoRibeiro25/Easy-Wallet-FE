@@ -42,7 +42,7 @@ onBeforeMount(() => {
     <div
       v-for="(review, index) in reviews"
       :key="index"
-      class="flex flex-col p-5 sm:mx-6 sm:my-0 my-6 border-2 border-gray-200 rounded-xl w-[350px]"
+      class="flex flex-col p-5 sm:mx-6 sm:my-0 my-6 border-2 dark:border-tertiaryColor border-septenaryColor rounded-xl w-[350px]"
     >
       <div class="flex flex-row">
         <img

@@ -11,6 +11,7 @@ export const theme = {
       quinaryColor: '#000000',
       senaryColor: '#FFFFFF',
       septenaryColor: '#e2e8f0',
+      octonaryColor: '#d6d7d8',
     },
   },
 };
