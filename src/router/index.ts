@@ -16,6 +16,8 @@ const validateUser = async ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUs
   else next();
 };
 
+// TODO: Add Not Found view
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior: () => ({ top: 0, left: 0 }), // Scroll to the top every time the route changes
@@ -28,6 +30,19 @@ const router = createRouter({
         await validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
 
         //TODO: Fix the Vue warning: "Invalid vnode type when creating vnode: undefined. "
+      },
+    },
+    {
+      path: '/auth/:form',
+      name: 'Auth',
+      component: () => import('@/views/Auth/AuthView.vue'),
+      beforeEnter: async (_, __, next) => {
+        // Only allow access if the form is "login" or "register"
+        if (!['login', 'register'].includes(_.params.form as string)) {
+          return next({ name: 'Home' });
+        }
+
+        await validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
       },
     },
     {

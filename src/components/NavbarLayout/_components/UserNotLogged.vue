@@ -11,7 +11,11 @@ import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
 
       <div className="relative flex items-center">
         <ThemeSwitcher class="justify-center" />
-        <SignButton class="ml-3 bg-senaryColor dark:bg-primaryColor" hideTextOnMobile />
+        <SignButton
+          class="ml-3 bg-senaryColor dark:bg-primaryColor"
+          form="login"
+          hideTextOnMobile
+        />
       </div>
     </div>
   </nav>

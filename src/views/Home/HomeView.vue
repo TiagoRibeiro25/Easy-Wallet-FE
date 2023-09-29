@@ -120,7 +120,11 @@ import UsersReviews from './_components/UsersReviews.vue';
       <h2 class="mb-2 text-3xl text-center">Start Using Easy Wallet Today</h2>
       <p class="text-center opacity-80">Try it out - you won't regret it</p>
       <div class="flex justify-center mt-6">
-        <SignButton class="ml-3 scale-125 bg-senaryColor dark:bg-primaryColor" text="Sign Up" />
+        <SignButton
+          class="ml-3 scale-125 bg-senaryColor dark:bg-primaryColor"
+          text="Sign Up"
+          form="register"
+        />
       </div>
     </section>
   </div>
