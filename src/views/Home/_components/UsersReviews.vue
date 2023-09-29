@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import StarIcon from '@/components/Icons/star-icon.vue';
 import { useDark } from '@vueuse/core';
+import { onBeforeMount, ref } from 'vue';
 import UsersReviews from './users-reviews.json';
 
 interface IReview {
@@ -12,20 +13,36 @@ interface IReview {
 
 const isDark = useDark();
 const reviews: IReview[] = UsersReviews;
+
+const screenWidth = ref(window.innerWidth);
+
+onBeforeMount(() => {
+  const resize = () => {
+    screenWidth.value = window.innerWidth;
+  };
+
+  window.addEventListener('resize', resize);
+
+  return () => {
+    window.removeEventListener('resize', resize);
+  };
+});
 </script>
 
 <template>
   <Vue3Marquee
-    :duration="100"
-    pauseOnHover
+    direction="reverse"
+    :duration="screenWidth > 640 ? 100 : 80"
     gradient
     :gradient-color="isDark ? [2, 8, 23] : [249, 250, 251]"
     gradient-length="100px"
+    :vertical="screenWidth < 640"
+    class="overflow-y-hidden max-h-[600px]"
   >
     <div
       v-for="(review, index) in reviews"
       :key="index"
-      class="flex flex-col p-5 mx-6 border-2 border-gray-200 rounded-xl w-[350px]"
+      class="flex flex-col p-5 sm:mx-6 sm:my-0 my-6 border-2 border-gray-200 rounded-xl w-[350px]"
     >
       <div class="flex flex-row">
         <img

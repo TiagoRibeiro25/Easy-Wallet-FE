@@ -111,7 +111,7 @@ import UsersReviews from './_components/UsersReviews.vue';
       </div>
     </section>
 
-    <section id="reviews" class="my-44">
+    <section id="reviews" class="flex flex-col items-center my-44">
       <h2 class="mb-8 text-3xl text-center">Discover What Others Are Saying</h2>
       <UsersReviews />
     </section>
