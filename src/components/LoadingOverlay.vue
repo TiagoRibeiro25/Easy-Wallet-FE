@@ -9,7 +9,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const time = ref(0);
+const time = ref<number>(0);
 
 const interval = setInterval(() => {
   time.value += 1;

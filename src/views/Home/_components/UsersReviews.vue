@@ -14,7 +14,7 @@ interface IReview {
 const isDark = useDark();
 const reviews: IReview[] = UsersReviews;
 
-const screenWidth = ref(window.innerWidth);
+const screenWidth = ref<number>(window.innerWidth);
 
 onBeforeMount(() => {
   const resize = () => {

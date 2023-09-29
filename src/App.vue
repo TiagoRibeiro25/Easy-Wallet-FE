@@ -11,9 +11,9 @@ import { useUserStore } from './stores/user';
 import LoadingFallback from './views/LoadingFallback.vue';
 
 const userStore = useUserStore();
-const isLoading = ref(true);
-const errorOnLoading = ref(false);
-const isUserLogged = ref(false);
+const isLoading = ref<boolean>(true);
+const errorOnLoading = ref<boolean>(false);
+const isUserLogged = ref<boolean>(false);
 
 watchEffect(() => {
   useDark(); // Add the dark class to the body (if the user has dark mode enabled)
