@@ -7,6 +7,8 @@ import WhyUseIllustration from '@/components/Illustrations/why-use-illustration.
 import SignButton from '@/components/SignButton.vue';
 import { RouterLink } from 'vue-router';
 import UsersReviews from './_components/UsersReviews.vue';
+
+console.log("I'm loaded!");
 </script>
 
 <template>
@@ -25,7 +27,7 @@ import UsersReviews from './_components/UsersReviews.vue';
           <CustomButton
             id="learn-more"
             name="learn-more"
-            class="mt-8"
+            class="mt-8 text-quinaryColor bg-quaternaryColor"
             :icon="DownArrowIcon"
             icon-position="right"
             iconAlt="Down Arrow"
@@ -104,7 +106,7 @@ import UsersReviews from './_components/UsersReviews.vue';
 
       <div class="flex justify-center mb-28">
         <RouterLink :to="{ name: 'Faq' }">
-          <CustomButton id="faq" name="faq" class="mt-8">
+          <CustomButton id="faq" name="faq" class="mt-8 text-quinaryColor bg-quaternaryColor">
             <template v-slot:default> Check FAQs </template>
           </CustomButton>
         </RouterLink>
