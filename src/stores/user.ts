@@ -46,8 +46,6 @@ export const useUserStore = defineStore('user', () => {
         console.log(error);
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
       return user.value;
     }
   };
