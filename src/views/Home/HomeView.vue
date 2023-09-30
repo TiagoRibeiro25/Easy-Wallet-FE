@@ -7,8 +7,6 @@ import WhyUseIllustration from '@/components/Illustrations/why-use-illustration.
 import SignButton from '@/components/SignButton.vue';
 import { RouterLink } from 'vue-router';
 import UsersReviews from './_components/UsersReviews.vue';
-
-console.log("I'm loaded!");
 </script>
 
 <template>
