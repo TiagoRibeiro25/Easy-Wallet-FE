@@ -138,9 +138,8 @@ const router = createRouter({
 
 router.beforeEach(async (to, _, next) => {
   const userStore = useUserStore();
-  const fetchedFirstTime = userStore.didFetchFirstTime();
 
-  if (fetchedFirstTime) {
+  if (userStore.didFetchFirstTime()) {
     return next();
   }
 
