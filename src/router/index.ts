@@ -7,7 +7,7 @@ interface IValidateUserProps {
   mustBeLoggedIn: boolean;
 }
 
-const validateUser = async ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProps) => {
+const validateUser = ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProps) => {
   const userStore = useUserStore();
   const isUserLoggedIn = userStore.isUserLoggedIn();
 
@@ -15,8 +15,6 @@ const validateUser = async ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUs
   else if (!mustBeLoggedIn && isUserLoggedIn) next({ name: fallbackRoute });
   else next();
 };
-
-// TODO: Add Not Found view
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,23 +25,34 @@ const router = createRouter({
       name: 'Home',
       component: () => import('@/views/Home/HomeView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-
-        //TODO: Fix the Vue warning: "Invalid vnode type when creating vnode: undefined. "
+        validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
       },
     },
     {
-      path: '/auth/:form',
+      path: '/auth/',
       name: 'Auth',
       component: () => import('@/views/Auth/AuthView.vue'),
       beforeEnter: async (_, __, next) => {
-        // Only allow access if the form is "login" or "register"
-        if (!['login', 'register'].includes(_.params.form as string)) {
-          return next({ name: 'Home' });
-        }
-
-        await validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
+        validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
       },
+      children: [
+        {
+          path: 'login',
+          name: 'Login',
+          component: () => import('@/views/Auth/_components/LoginForm.vue'),
+          beforeEnter: async (_, __, next) => {
+            validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
+          },
+        },
+        {
+          path: 'register',
+          name: 'Register',
+          component: () => import('@/views/Auth/_components/RegisterForm.vue'),
+          beforeEnter: async (_, __, next) => {
+            validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
+          },
+        },
+      ],
     },
     {
       path: '/about',
@@ -76,7 +85,7 @@ const router = createRouter({
       name: 'Dashboard',
       component: () => import('@/views/DashboardView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
     },
     {
@@ -84,7 +93,7 @@ const router = createRouter({
       name: 'Calendar',
       component: () => import('@/views/CalendarView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
     },
     {
@@ -92,7 +101,7 @@ const router = createRouter({
       name: 'AddExpense',
       component: () => import('@/views/AddExpenseView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
     },
     {
@@ -100,7 +109,7 @@ const router = createRouter({
       name: 'Categories',
       component: () => import('@/views/ManageCategoriesView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
     },
     {
@@ -108,7 +117,7 @@ const router = createRouter({
       name: 'Years',
       component: () => import('@/views/YearsView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
     },
     {
@@ -116,8 +125,13 @@ const router = createRouter({
       name: 'Settings',
       component: () => import('@/views/SettingsView.vue'),
       beforeEnter: async (_, __, next) => {
-        await validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/views/NotFoundView.vue'),
     },
   ],
 });
