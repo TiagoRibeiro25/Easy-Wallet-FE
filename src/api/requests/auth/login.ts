@@ -1,7 +1,7 @@
+import api from '@/api/axios.config';
 import { type IAPIResponse } from '@/api/types';
-import { type AxiosResponse } from 'axios';
-import { type IUser } from '../../../types';
-import api from '../../axios.config';
+import type { IUser } from '@/types';
+import type { AxiosResponse } from 'axios';
 
 interface IResponse extends IAPIResponse {
   data: {
@@ -18,8 +18,16 @@ export interface IGetLoggedUserData extends IAPIResponse {
   data: IUser;
 }
 
-export default async (): Promise<IGetLoggedUserData> => {
-  const response: AxiosResponse<IResponse> = await api.get('/v1/user/me');
+export default async (
+  email: string,
+  password: string,
+  rememberMe: boolean,
+): Promise<IGetLoggedUserData> => {
+  const response: AxiosResponse<IResponse> = await api.post('/auth/login', {
+    email,
+    password,
+    remember_me: rememberMe,
+  });
   const data = response.data;
 
   return {
