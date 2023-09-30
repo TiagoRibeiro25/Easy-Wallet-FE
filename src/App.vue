@@ -4,6 +4,7 @@ import { onBeforeMount, ref, watchEffect } from 'vue';
 import FooterLayout from './components/FooterLayout.vue';
 import LoadingOverlay from './components/LoadingOverlay.vue';
 import NavbarLayout from './components/NavbarLayout/NavbarLayout.vue';
+import NotificationsLayout from './components/NotificationsLayout.vue';
 import TopNavigation from './components/TopNavigation.vue';
 import { isUserOnDesktop } from './lib/utils';
 import { useUserStore } from './stores/user';
@@ -67,6 +68,7 @@ watchEffect(() => {
         </Suspense>
       </div>
       <FooterLayout />
+      <NotificationsLayout />
     </main>
   </div>
 </template>
