@@ -6,3 +6,14 @@ export interface IUser {
   currency: string;
   createdAt: string;
 }
+
+export type NotificationType = 'success' | 'error' | 'warning' | 'info';
+
+export interface INotification {
+  id: string;
+  title: string;
+  message: string;
+  type: NotificationType;
+}
+
+export interface INewNotification extends Omit<INotification, 'id'> {}
