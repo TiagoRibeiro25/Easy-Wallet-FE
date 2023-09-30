@@ -136,4 +136,18 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach(async (to, _, next) => {
+  const userStore = useUserStore();
+  const fetchedFirstTime = userStore.didFetchFirstTime();
+
+  if (fetchedFirstTime) {
+    return next();
+  }
+
+  await userStore.getUser();
+  userStore.updateFetchedFirstTime();
+
+  return next();
+});
+
 export default router;

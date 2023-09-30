@@ -1,42 +1,30 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core';
-import { ref, watchEffect } from 'vue';
-import requests from './api/requests';
+import { onBeforeMount, ref, watchEffect } from 'vue';
 import FooterLayout from './components/FooterLayout.vue';
 import LoadingOverlay from './components/LoadingOverlay.vue';
 import NavbarLayout from './components/NavbarLayout/NavbarLayout.vue';
 import TopNavigation from './components/TopNavigation.vue';
 import { isUserOnDesktop } from './lib/utils';
 import { useUserStore } from './stores/user';
-import LoadingFallback from './views/LoadingFallback.vue';
 
 const userStore = useUserStore();
 const isLoading = ref<boolean>(true);
 const errorOnLoading = ref<boolean>(false);
 const isUserLogged = ref<boolean>(false);
 
-watchEffect(() => {
+onBeforeMount(() => {
   useDark(); // Add the dark class to the body (if the user has dark mode enabled)
+});
 
-  requests.ping().then(result => {
-    if (result !== 'pong') {
-      errorOnLoading.value = true;
-      isLoading.value = false;
-    } else {
-      userStore
-        .getUser()
-        .then(user => {
-          isUserLogged.value = !!user;
-          errorOnLoading.value = false;
-        })
-        .catch(() => {
-          errorOnLoading.value = true;
-        })
-        .finally(() => {
-          isLoading.value = false;
-        });
-    }
-  });
+watchEffect(() => {
+  // If the server hasn't responded yet, don't do anythingq (the loading overlay will be shown)
+  if (!userStore.didFetchFirstTime()) {
+    return;
+  }
+
+  isUserLogged.value = userStore.isUserLoggedIn();
+  isLoading.value = false;
 });
 </script>
 

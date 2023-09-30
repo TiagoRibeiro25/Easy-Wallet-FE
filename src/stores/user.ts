@@ -5,7 +5,24 @@ import { ref } from 'vue';
 import requests from '../api/requests/index';
 
 export const useUserStore = defineStore('user', () => {
+  const fetchedFirstTime = ref(false);
   const user = ref<IUser>();
+
+  /**
+   * Returns a boolean indicating whether the data has been fetched for the first time.
+   * @returns {boolean} A boolean indicating whether the data has been fetched for the first time.
+   */
+  const didFetchFirstTime = (): boolean => {
+    return fetchedFirstTime.value;
+  };
+
+  /**
+   * Updates the fetchedFirstTime value to true.
+   * @returns void
+   */
+  const updateFetchedFirstTime = (): void => {
+    fetchedFirstTime.value = true;
+  };
 
   /**
    * Checks if a user is currently logged in.
@@ -67,5 +84,5 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
-  return { isUserLoggedIn, getUser, login };
+  return { didFetchFirstTime, updateFetchedFirstTime, isUserLoggedIn, getUser, login };
 });
