@@ -12,7 +12,7 @@ const props = defineProps<IProps>();
 
 <template>
   <RouterLink
-    :to="{ name: 'Auth', params: { form: props.form || 'login' } }"
+    :to="{ name: props.form === 'login' ? 'Login' : 'Register' }"
     class="flex items-center justify-center sm:h-[38px] h-[34px] sm:px-4 px-2 border rounded-lg focus:outline-none border-septenaryColor dark:border-tertiaryColor dark:hover:bg-tertiaryColor hover:bg-septenaryColor space-x-2"
     :class="{ 'sm:w-auto w-[34px]': props.hideTextOnMobile }"
   >
