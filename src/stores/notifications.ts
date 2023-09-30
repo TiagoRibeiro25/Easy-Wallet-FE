@@ -7,9 +7,9 @@ export const useNotificationsStore = defineStore('notifications', () => {
 
   /**
    * Returns the current notifications array.
-   * @returns {Array} The current notifications array.
+   * @returns {INotification[]} The current notifications array.
    */
-  const getAll = () => {
+  const getAll = (): INotification[] => {
     return notifications.value;
   };
 
@@ -17,9 +17,9 @@ export const useNotificationsStore = defineStore('notifications', () => {
    * Adds a new notification to the notifications array.
    * The notification will be deleted after 5 seconds.
    * @param notification - The new notification to be added.
-   * @returns The id of the new notification.
+   * @returns {string} The id of the new notification.
    */
-  const add = (notification: INewNotification) => {
+  const add = (notification: INewNotification): string => {
     const id = crypto.randomUUID();
 
     notifications.value.push({ ...notification, id });
