@@ -80,7 +80,7 @@ To get a local copy up and running follow these simple steps.
 In order to run this project, you need to have installed
 
 * Nodejs and npm
-* Have this [project]("https://github.com/TiagoRibeiro25/Easy-Wallet-BE") running locally or in a server
+* Have this [project](https://github.com/TiagoRibeiro25/Easy-Wallet-BE) running locally or in a server
 
 ### Installation
 
@@ -94,7 +94,7 @@ In order to run this project, you need to have installed
 
 3. Create a .env file, add the variables in the .env.example file and fill them with your own values.
 
-4. Have the [back end]("https://github.com/TiagoRibeiro25/Easy-Wallet-FE.git") running locally or in a server
+4. Have the [back end](https://github.com/TiagoRibeiro25/Easy-Wallet-FE.git) running locally or in a server
 
 5. Run the project
 
