@@ -7,6 +7,7 @@ import { useNotificationsStore } from '@/stores/notifications';
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import ForgotPasswordModal from './_components/ForgotPasswordModal.vue';
 
 const router = useRouter();
 
@@ -17,6 +18,8 @@ const email = ref<string>('');
 const password = ref<string>('');
 const rememberMe = ref<boolean>(false);
 const loading = ref<boolean>(false);
+
+const showForgotPasswordModal = ref<boolean>(false);
 
 const handleSubmit = async () => {
   loading.value = true;
@@ -30,7 +33,10 @@ const handleSubmit = async () => {
 
   if (!res.success) {
     notificationsStore.add({
-      type: 'error',
+      type:
+        res.message === 'Please verify your account. An email has been sent to your email address'
+          ? 'info'
+          : 'error',
       title: 'Authentication',
       message: res.message,
     });
@@ -50,7 +56,7 @@ const handleSubmit = async () => {
 
 <template>
   <div class="h-96">
-    <h2 class="text-xl text-center">Log in to your account</h2>
+    <h1 class="text-xl text-center">Log in to your account</h1>
 
     <form class="mt-12 mb-8 space-y-6" @submit.prevent="handleSubmit">
       <CustomInput
@@ -90,7 +96,7 @@ const handleSubmit = async () => {
           :icon="LoginIcon"
           icon-position="left"
           :disabled="loading"
-          class="px-6 border border-octonaryColor bg-senaryColor hover:bg-septenaryColor dark:border-tertiaryColor dark:bg-primaryColor dark:hover:bg-tertiaryColor dark:hover:border-primaryColor focus:border-quaternaryColor dark:focus:border-quaternaryColor disabled:cursor-default disabled:opacity-50"
+          class="px-6 bg-quaternaryColor text-quinaryColor hover:opacity-80 focus:border focus:border-primaryColor dark:focus:border-septenaryColor disabled:cursor-default disabled:opacity-50"
         >
           <template v-slot:default>
             <span class="font-medium"> Sign In </span>
@@ -103,6 +109,7 @@ const handleSubmit = async () => {
       <span>
         <button
           class="transition-all duration-300 ease-in-out opacity-50 hover:opacity-100 hover:underline"
+          @click="showForgotPasswordModal = true"
         >
           Forgot your password?
         </button>
@@ -116,5 +123,8 @@ const handleSubmit = async () => {
         </RouterLink>
       </span>
     </div>
+
+    <!-- Forgot Password Modal -->
+    <ForgotPasswordModal v-model="showForgotPasswordModal" />
   </div>
 </template>
