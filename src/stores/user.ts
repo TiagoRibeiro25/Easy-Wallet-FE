@@ -59,7 +59,6 @@ export const useUserStore = defineStore('user', () => {
         const response = await requests.user.getLoggedUser();
         user.value = response.data;
       } catch (error: any) {
-        console.log(error);
         if (error.response?.status !== 401 && !didFetchFirstTime()) {
           updateDidErrorOccur();
         }
