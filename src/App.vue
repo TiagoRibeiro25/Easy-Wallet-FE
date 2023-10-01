@@ -18,8 +18,11 @@ onBeforeMount(() => {
   useDark(); // Add the dark class to the body (if the user has dark mode enabled)
 });
 
+/**
+ * Watches for changes in the user store and updates the UI accordingly.
+ * If the server hasn't responded yet, the loading overlay will be shown.
+ */
 watchEffect(() => {
-  // If the server hasn't responded yet, don't do anythingq (the loading overlay will be shown)
   if (!userStore.didFetchFirstTime()) {
     return;
   }

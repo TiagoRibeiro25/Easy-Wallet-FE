@@ -7,6 +7,13 @@ interface IValidateUserProps {
   mustBeLoggedIn: boolean;
 }
 
+/**
+ * Validates if a user is logged in and redirects to a fallback route if necessary.
+ * @param {IValidateUserProps} props - The properties for validating the user.
+ * @param {Function} props.next - The function to call to proceed to the next route.
+ * @param {string} props.fallbackRoute - The name of the fallback route to redirect to if the user is not logged in.
+ * @param {boolean} props.mustBeLoggedIn - A flag indicating if the user must be logged in to proceed.
+ */
 const validateUser = ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProps) => {
   const userStore = useUserStore();
   const isUserLoggedIn = userStore.isUserLoggedIn();

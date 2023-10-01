@@ -10,6 +10,11 @@ interface IProps {
 const props = defineProps<IProps>();
 const emits = defineEmits(['close']);
 
+/**
+ * Handles click outside of the modal.
+ * If the click target is the modal itself, emits a 'close' event.
+ * @param {MouseEvent} e - The mouse event object.
+ */
 const handleClickOutside = (e: MouseEvent) => {
   if (e.target === e.currentTarget) {
     emits('close');

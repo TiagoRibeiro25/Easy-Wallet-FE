@@ -49,6 +49,12 @@ const topNavigationLinks: INavigationLink[] = [
   },
 ];
 
+/**
+ * Computed property that returns the title to be displayed in the mobile navigation bar.
+ * The title is based on the current route name.
+ *
+ * @returns {string} The title to be displayed in the mobile navigation bar.
+ */
 const getMobileNavTitle = computed(() => {
   const routeHook = useRoute();
 

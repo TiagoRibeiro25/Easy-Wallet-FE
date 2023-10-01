@@ -18,9 +18,15 @@ const email = ref<string>('');
 const password = ref<string>('');
 const rememberMe = ref<boolean>(false);
 const loading = ref<boolean>(false);
-
 const showForgotPasswordModal = ref<boolean>(false);
 
+/**
+ * Handles the submission of the login form.
+ * Sets the loading state to true and displays a notification.
+ * Calls the userStore's login method with the email, password and rememberMe values.
+ * If the login is unsuccessful, displays an error notification.
+ * If the login is successful, displays a success notification and navigates to the Dashboard page.
+ */
 const handleSubmit = async () => {
   loading.value = true;
   notificationsStore.add({
