@@ -26,6 +26,7 @@ watchEffect(() => {
 
   isUserLogged.value = userStore.isUserLoggedIn();
   isLoading.value = false;
+  errorOnLoading.value = userStore.didErrorOccur();
 });
 </script>
 

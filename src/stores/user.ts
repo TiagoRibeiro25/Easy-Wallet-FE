@@ -6,6 +6,7 @@ import requests from '../api/requests/index';
 
 export const useUserStore = defineStore('user', () => {
   const fetchedFirstTime = ref(false);
+  const didAnErrorOccur = ref(false);
   const user = ref<IUser>();
 
   /**
@@ -22,6 +23,21 @@ export const useUserStore = defineStore('user', () => {
    */
   const updateFetchedFirstTime = (): void => {
     fetchedFirstTime.value = true;
+  };
+
+  /**
+   * Returns a boolean indicating whether an error occurred.
+   * @returns {boolean} A boolean indicating whether an error occurred.
+   */
+  const didErrorOccur = (): boolean => {
+    return didAnErrorOccur.value;
+  };
+
+  /**
+   * Sets the value of `didAnErrorOccur` to `true`.
+   */
+  const updateDidErrorOccur = (): void => {
+    didAnErrorOccur.value = true;
   };
 
   /**
@@ -42,8 +58,11 @@ export const useUserStore = defineStore('user', () => {
       try {
         const response = await requests.user.getLoggedUser();
         user.value = response.data;
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
+        if (error.response?.status !== 401 && !didFetchFirstTime()) {
+          updateDidErrorOccur();
+        }
       }
 
       return user.value;
@@ -82,5 +101,13 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
-  return { didFetchFirstTime, updateFetchedFirstTime, isUserLoggedIn, getUser, login };
+  return {
+    didFetchFirstTime,
+    updateFetchedFirstTime,
+    didErrorOccur,
+    updateDidErrorOccur,
+    isUserLoggedIn,
+    getUser,
+    login,
+  };
 });
