@@ -1,4 +1,5 @@
 import { type IAPIResponse } from '@/api/types';
+import { isEmailValid } from '@/lib/validateData';
 import type { IUser } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -80,6 +81,14 @@ export const useUserStore = defineStore('user', () => {
     password: string,
     rememberMe: boolean,
   ): Promise<IAPIResponse> => {
+    if (!isEmailValid(email)) {
+      return {
+        success: false,
+        message: 'Invalid email',
+        data: null,
+      };
+    }
+
     try {
       const res = await requests.auth.login(email, password, rememberMe);
       user.value = res.data;
@@ -106,6 +115,14 @@ export const useUserStore = defineStore('user', () => {
    * @returns A Promise that resolves to an IAPIResponse object.
    */
   const forgotPassword = async (email: string): Promise<IAPIResponse> => {
+    if (!isEmailValid(email)) {
+      return {
+        success: false,
+        message: 'Invalid email',
+        data: null,
+      };
+    }
+
     try {
       const res = await requests.auth.forgotPassword(email);
       return { success: true, message: res.message, data: res.data };
