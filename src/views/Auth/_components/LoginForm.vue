@@ -90,7 +90,7 @@ const handleSubmit = async () => {
           :icon="LoginIcon"
           icon-position="left"
           :disabled="loading"
-          class="px-6 border border-octonaryColor bg-senaryColor hover:bg-septenaryColor dark:border-tertiaryColor dark:bg-primaryColor dark:hover:bg-tertiaryColor dark:hover:border-primaryColor focus:border-quaternaryColor dark:focus:border-quaternaryColor"
+          class="px-6 border border-octonaryColor bg-senaryColor hover:bg-septenaryColor dark:border-tertiaryColor dark:bg-primaryColor dark:hover:bg-tertiaryColor dark:hover:border-primaryColor focus:border-quaternaryColor dark:focus:border-quaternaryColor disabled:cursor-default disabled:opacity-50"
         >
           <template v-slot:default>
             <span class="font-medium"> Sign In </span>
