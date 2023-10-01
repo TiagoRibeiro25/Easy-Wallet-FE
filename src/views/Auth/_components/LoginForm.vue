@@ -41,7 +41,7 @@ const handleSubmit = async () => {
       message: 'Logged in successfully',
     });
 
-    router.push({ name: 'Dashboard' });
+    await router.push({ name: 'Dashboard' });
   }
 
   loading.value = false;
@@ -101,12 +101,11 @@ const handleSubmit = async () => {
 
     <div class="flex flex-col space-y-1 text-sm text-center">
       <span>
-        <RouterLink
-          :to="{ name: 'Register' }"
+        <button
           class="transition-all duration-300 ease-in-out opacity-50 hover:opacity-100 hover:underline"
         >
           Forgot your password?
-        </RouterLink>
+        </button>
       </span>
       <span>
         <RouterLink
