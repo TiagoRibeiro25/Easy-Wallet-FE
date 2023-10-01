@@ -27,12 +27,11 @@ const handleClickOutside = (e: MouseEvent) => {
         class="fixed inset-0 z-50 flex items-center justify-center w-full h-full px-3 bg-black bg-opacity-50"
         @click="handleClickOutside"
       >
-        <div
-          class="relative overflow-y-auto bg-white rounded-lg shadow max-h-[90vh] w-[90vw] max-w-2xl"
-        >
+        <div class="relative overflow-y-auto rounded-lg shadow max-h-[90vh] w-[90vw] max-w-2xl">
           <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
+          <div
+            class="relative border rounded-lg shadow bg-senaryColor dark:bg-secondaryColor border-octonaryColor dark:border-tertiaryColor"
+          >
             <header
               class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
             >
@@ -47,12 +46,10 @@ const handleClickOutside = (e: MouseEvent) => {
               </button>
             </header>
 
-            <!-- Modal body -->
             <main class="p-6">
               <slot name="body"></slot>
             </main>
 
-            <!-- Modal footer -->
             <footer
               class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"
             >
