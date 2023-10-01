@@ -26,7 +26,7 @@ const darkBorder =
       class="py-[4px] my-3 w-[175px] sm:w-[200px] justify-center sm:justify-start border text-base disabled:opacity-100"
       :class="
         routeHook.name === props.route.name
-          ? 'text-quinaryColor dark:border-quinaryColor bg-quaternaryColor'
+          ? 'text-quinaryColor dark:border-quaternaryColor bg-quaternaryColor'
           : `dark:text-septenaryColor ${darkBorder} bg-transparent dark:hover:bg-tertiaryColor hover:bg-septenaryColor`
       "
       :icon="props.icon"
