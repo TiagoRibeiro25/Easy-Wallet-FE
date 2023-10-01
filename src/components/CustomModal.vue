@@ -38,7 +38,7 @@ const handleClickOutside = (e: MouseEvent) => {
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ title }}</h3>
               <button
                 type="button"
-                class="inline-flex items-center justify-center w-8 h-8 ml-auto text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                class="inline-flex items-center justify-center w-8 h-8 ml-auto text-sm text-gray-400 transition-all duration-300 ease-in-out bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                 @click="$emit('close')"
               >
                 <CloseIconVue class="w-6 h-6" />
