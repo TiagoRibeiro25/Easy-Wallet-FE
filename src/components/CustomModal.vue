@@ -24,7 +24,7 @@ const handleClickOutside = (e: MouseEvent) => {
         v-show="props.show"
         :id="props.id"
         tabindex="-1"
-        class="fixed inset-0 z-50 flex items-center justify-center w-full h-full px-3 bg-black bg-opacity-50"
+        class="fixed inset-0 z-40 flex items-center justify-center w-full h-full px-3 bg-black bg-opacity-50"
         @click="handleClickOutside"
       >
         <div class="relative overflow-y-auto rounded-lg shadow max-h-[90vh] w-[90vw] max-w-2xl">
