@@ -3,11 +3,16 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomModalVue from '@/components/CustomModal.vue';
 import SendEmailIcon from '@/components/Icons/dashboard-icon.vue';
+import { useNotificationsStore } from '@/stores/notifications';
+import { useUserStore } from '@/stores/user';
 import { ref, watch, watchEffect } from 'vue';
 
 interface IProps {
   modelValue: boolean;
 }
+
+const userStore = useUserStore();
+const notificationsStore = useNotificationsStore();
 
 const props = defineProps<IProps>();
 const emits = defineEmits(['update:modelValue']);
@@ -16,8 +21,35 @@ const showModal = ref<boolean>(props.modelValue);
 const email = ref<string>('');
 const loading = ref<boolean>(false);
 
-const handleSubmit = () => {
-  console.log('hello world');
+/**
+ * Handles the submission of the forgot password form.
+ * Sends a request to reset the password and displays a notification with the result.
+ * Closes the modal after 500ms if the request was successful.
+ */
+const handleSubmit = async () => {
+  loading.value = true;
+
+  notificationsStore.add({
+    type: 'info',
+    title: 'Password Reset',
+    message: 'Requesting a password reset email...',
+  });
+
+  const res = await userStore.forgotPassword(email.value);
+
+  notificationsStore.add({
+    type: res.success ? 'success' : 'error',
+    title: 'Password Reset',
+    message: res.message,
+  });
+
+  loading.value = false;
+
+  setTimeout(() => {
+    if (res.success) {
+      showModal.value = false;
+    }
+  }, 500);
 };
 
 watch(showModal, value => {
