@@ -100,6 +100,24 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
+  /**
+   * Sends a forgot password request to the server.
+   * @param email - The email address of the user.
+   * @returns A Promise that resolves to an IAPIResponse object.
+   */
+  const forgotPassword = async (email: string): Promise<IAPIResponse> => {
+    try {
+      const res = await requests.auth.forgotPassword(email);
+      return { success: true, message: res.message, data: res.data };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.response.status === 400 ? 'Invalid email' : error.response.data.message,
+        data: null,
+      };
+    }
+  };
+
   return {
     didFetchFirstTime,
     updateFetchedFirstTime,
@@ -108,5 +126,6 @@ export const useUserStore = defineStore('user', () => {
     isUserLoggedIn,
     getUser,
     login,
+    forgotPassword,
   };
 });
