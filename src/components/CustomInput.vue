@@ -39,6 +39,6 @@ const updateValue = (event: Event) => {
     :disabled="props.disabled"
     :autocomplete="props.autoComplete"
     @input="updateValue($event)"
-    class="w-full px-4 py-2 border rounded-lg focus:outline-none border-octonaryColor bg-senaryColor dark:border-tertiaryColor dark:bg-primaryColor focus:border-quaternaryColor active:border-quaternaryColor dark:focus:border-quaternaryColor dark:active:border-quaternaryColor"
+    class="w-full px-4 py-2 border rounded-lg focus:outline-none border-octonaryColor bg-senaryColor dark:border-tertiaryColor dark:bg-primaryColor focus:border-quaternaryColor active:border-quaternaryColor dark:focus:border-quaternaryColor dark:active:border-quaternaryColor disabled:opacity-50 disabled:cursor-not-allowed"
   />
 </template>
