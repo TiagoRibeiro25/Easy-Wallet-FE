@@ -9,6 +9,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
+const EXPECTED_TIME = 40; // seconds
 const time = ref<number>(0);
 
 const interval = setInterval(() => {
@@ -28,7 +29,7 @@ onUnmounted(() => clearInterval(interval));
 
       <div
         class="flex flex-row items-center space-x-3"
-        :class="time >= 30 ? 'text-red-500 dark:text-red-400' : 'text-quaternaryColor'"
+        :class="time >= EXPECTED_TIME ? 'text-red-500 dark:text-red-400' : 'text-quaternaryColor'"
       >
         <ClockLoadingIcon class="w-10 h-10 hover:animate-spin" />
         <span class="font-bold"> {{ time }} seconds </span>
@@ -54,7 +55,7 @@ onUnmounted(() => clearInterval(interval));
     class="absolute bottom-0 left-0 right-0 flex items-center justify-center w-screen h-16 px-6 mx-auto"
   >
     <span class="text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-      This shouldn't take more than 30 seconds
+      This shouldn't take more than {{ EXPECTED_TIME }} seconds
     </span>
   </div>
 </template>

@@ -5,7 +5,6 @@ import HeroIllustration from '@/components/Illustrations/hero-illustration.vue';
 import WhatIsIllustration from '@/components/Illustrations/what-is-illustration.vue';
 import WhyUseIllustration from '@/components/Illustrations/why-use-illustration.vue';
 import SignButton from '@/components/SignButton.vue';
-import { RouterLink } from 'vue-router';
 import UsersReviews from './_components/UsersReviews.vue';
 </script>
 

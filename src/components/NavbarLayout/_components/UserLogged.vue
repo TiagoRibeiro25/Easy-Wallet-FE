@@ -12,7 +12,7 @@ import LogoName from '@/components/LogoName.vue';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
 import { isUserOnDesktop } from '@/lib/utils';
 import { computed } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import NavLink from './_components/NavLink.vue';
 
 interface INavigationLink {
