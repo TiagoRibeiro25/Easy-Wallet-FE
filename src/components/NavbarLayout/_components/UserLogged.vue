@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import CustomButton from '@/components/CustomButton.vue';
-import AddIcon from '@/components/Icons/add-icon.vue';
-import CalendarIcon from '@/components/Icons/calendar-icon.vue';
-import CategoryIcon from '@/components/Icons/category-icon.vue';
-import DashboardIcon from '@/components/Icons/dashboard-icon.vue';
 import GetHelpIcon from '@/components/Icons/get-help-icon.vue';
-import PreviousYearsIcon from '@/components/Icons/previous-years-icon.vue';
 import SearchIcon from '@/components/Icons/search-icon.vue';
 import SettingsIcon from '@/components/Icons/settings-icon.vue';
 import LogoName from '@/components/LogoName.vue';
@@ -14,40 +9,7 @@ import { isUserOnDesktop } from '@/lib/utils';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import NavLink from './_components/NavLink.vue';
-
-interface INavigationLink {
-  name: string;
-  icon: any;
-  route: { name: string; params?: { year: number } };
-}
-
-const topNavigationLinks: INavigationLink[] = [
-  {
-    name: 'Dashboard',
-    icon: DashboardIcon,
-    route: { name: 'Dashboard' },
-  },
-  {
-    name: 'Calendar',
-    icon: CalendarIcon,
-    route: { name: 'Calendar', params: { year: new Date().getFullYear() } },
-  },
-  {
-    name: 'Add Expense',
-    icon: AddIcon,
-    route: { name: 'AddExpense' },
-  },
-  {
-    name: 'Categories',
-    icon: CategoryIcon,
-    route: { name: 'Categories' },
-  },
-  {
-    name: 'Previous Years',
-    icon: PreviousYearsIcon,
-    route: { name: 'Years' },
-  },
-];
+import topNavigationLinks from './topNavigationLinks';
 
 /**
  * Computed property that returns the title to be displayed in the mobile navigation bar.
