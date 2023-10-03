@@ -14,20 +14,21 @@ interface IResponse extends IAPIResponse {
   };
 }
 
-export interface ILoginUserData extends IAPIResponse {
+export interface IRegisterUserData extends IAPIResponse {
   data: IUser;
 }
 
 export default async (
   email: string,
+  displayName: string,
   password: string,
-  rememberMe: boolean,
-): Promise<ILoginUserData> => {
-  const response: AxiosResponse<IResponse> = await api.post('/auth/login', {
+): Promise<IRegisterUserData> => {
+  const response: AxiosResponse<IResponse> = await api.post('/auth/register', {
     email,
+    display_name: displayName,
     password,
-    remember_me: rememberMe,
   });
+
   const data = response.data;
 
   return {

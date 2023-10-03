@@ -110,6 +110,44 @@ export const useUserStore = defineStore('user', () => {
   };
 
   /**
+   * Registers a new user with the provided email, display name, and password.
+   * @param email The email address of the user to register.
+   * @param displayName The display name of the user to register.
+   * @param password The password of the user to register.
+   * @returns A Promise that resolves to an IAPIResponse object.
+   */
+  const register = async (
+    email: string,
+    displayName: string,
+    password: string,
+  ): Promise<IAPIResponse> => {
+    // Validate the email address
+    if (!isEmailValid(email)) {
+      return {
+        success: false,
+        message: 'Invalid email',
+        data: null,
+      };
+    }
+
+    try {
+      const res = await requests.auth.register(email, displayName, password);
+
+      return {
+        success: true,
+        message: res.message,
+        data: res.data,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.response.status === 400 ? 'Invalid data' : error.response.data.message,
+        data: null,
+      };
+    }
+  };
+
+  /**
    * Sends a forgot password request to the server.
    * @param email - The email address of the user.
    * @returns A Promise that resolves to an IAPIResponse object.
@@ -143,6 +181,7 @@ export const useUserStore = defineStore('user', () => {
     isUserLoggedIn,
     getUser,
     login,
+    register,
     forgotPassword,
   };
 });

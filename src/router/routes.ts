@@ -23,6 +23,14 @@ const validateUser = ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProp
   else next();
 };
 
+/**
+ * An array of RouteRecordRaw objects that define the routes for the application.
+ * Each object contains a path, name, and component property, and may also include
+ * a beforeEnter property that defines a function to be called before the route is
+ * entered. The array also includes child routes for the Auth route.
+ *
+ * @type {readonly RouteRecordRaw[]}
+ */
 const routes: readonly RouteRecordRaw[] = [
   {
     path: '/',
