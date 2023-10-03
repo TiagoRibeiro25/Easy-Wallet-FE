@@ -121,7 +121,6 @@ export const useUserStore = defineStore('user', () => {
     displayName: string,
     password: string,
   ): Promise<IAPIResponse> => {
-    // Validate the email address
     if (!isEmailValid(email)) {
       return {
         success: false,
@@ -139,9 +138,21 @@ export const useUserStore = defineStore('user', () => {
         data: res.data,
       };
     } catch (error: any) {
+      let message = error.response.data.message;
+
+      if (error.response.status === 400) {
+        if (message.toLowerCase().includes('email')) {
+          message = 'Invalid email';
+        } else if (message.toLowerCase().includes('password')) {
+          message = 'Invalid password';
+        } else if (message.toLowerCase().includes('display_name')) {
+          message = 'Invalid username';
+        }
+      }
+
       return {
         success: false,
-        message: error.response.status === 400 ? 'Invalid data' : error.response.data.message,
+        message,
         data: null,
       };
     }

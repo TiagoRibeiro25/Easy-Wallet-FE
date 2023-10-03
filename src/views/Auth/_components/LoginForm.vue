@@ -27,7 +27,7 @@ const showForgotPasswordModal = ref<boolean>(false);
  * If the login is unsuccessful, displays an error notification.
  * If the login is successful, displays a success notification and navigates to the Dashboard page.
  */
-const handleSubmit = async () => {
+const handleSubmit = async (): Promise<void> => {
   loading.value = true;
   notificationsStore.add({
     type: 'info',
@@ -64,7 +64,7 @@ const handleSubmit = async () => {
   <div class="h-96">
     <h1 class="text-xl text-center">Log in to your account</h1>
 
-    <form class="mt-12 mb-8 space-y-6" @submit.prevent="handleSubmit">
+    <form id="login-form" class="mt-12 mb-8 space-y-6" @submit.prevent="handleSubmit">
       <CustomInput
         id="email"
         type="email"
