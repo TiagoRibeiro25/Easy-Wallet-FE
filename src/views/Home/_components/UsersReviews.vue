@@ -32,7 +32,7 @@ onBeforeMount(() => {
 <template>
   <Vue3Marquee
     direction="reverse"
-    :duration="screenWidth > 640 ? 100 : 80"
+    :duration="screenWidth > 640 ? 100 : 60"
     gradient
     :gradient-color="isDark ? [2, 8, 23] : [249, 250, 251]"
     gradient-length="100px"
@@ -42,7 +42,7 @@ onBeforeMount(() => {
     <div
       v-for="(review, index) in reviews"
       :key="index"
-      class="flex flex-col p-5 sm:mx-6 sm:my-0 my-6 border-2 dark:border-tertiaryColor border-septenaryColor rounded-xl w-[350px]"
+      class="flex flex-col p-5 sm:mx-6 sm:my-0 my-6 border-2 dark:border-tertiaryColor border-septenaryColor rounded-xl w-[90vw] sm:w-[350px]"
     >
       <div class="flex flex-row">
         <img
