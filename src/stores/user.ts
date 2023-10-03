@@ -1,5 +1,5 @@
 import { type IAPIResponse } from '@/api/types';
-import { isEmailValid } from '@/lib/validateData';
+import { isEmailValid, isPasswordValid } from '@/lib/validateData';
 import type { IUser } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -184,6 +184,33 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
+  /**
+   * Changes the user's password.
+   * @param token - The user's token.
+   * @param password - The new password.
+   * @returns An object containing the success status, a message, and data.
+   */
+  const changePassword = async (token: string, password: string): Promise<IAPIResponse> => {
+    if (!isPasswordValid(password)) {
+      return {
+        success: false,
+        message: 'Invalid password',
+        data: null,
+      };
+    }
+
+    try {
+      const res = await requests.auth.resetPassword(token, password);
+      return { success: true, message: res.message, data: res.data };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.response.status === 400 ? 'Invalid password' : error.response.data.message,
+        data: null,
+      };
+    }
+  };
+
   return {
     didFetchFirstTime,
     updateFetchedFirstTime,
@@ -194,5 +221,6 @@ export const useUserStore = defineStore('user', () => {
     login,
     register,
     forgotPassword,
+    changePassword,
   };
 });

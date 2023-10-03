@@ -47,7 +47,7 @@ const handleSubmit = async (): Promise<void> => {
   <div class="h-96">
     <h1 class="text-xl text-center">Create an account to start using the app</h1>
 
-    <form id="register-form" class="mt-12 mb-8 space-y-6" @submit.prevent="handleSubmit">
+    <form id="register-form" class="mt-12 space-y-6" @submit.prevent="handleSubmit">
       <CustomInput
         id="email"
         type="email"
