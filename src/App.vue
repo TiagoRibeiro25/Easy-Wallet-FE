@@ -8,6 +8,7 @@ import NotificationsLayout from './components/NotificationsLayout.vue';
 import TopNavigation from './components/TopNavigation.vue';
 import { isUserOnDesktop } from './lib/utils';
 import { useUserStore } from './stores/user';
+import LoadingFallback from './views/LoadingFallback.vue';
 
 const userStore = useUserStore();
 const isLoading = ref<boolean>(true);
@@ -65,7 +66,6 @@ watchEffect(() => {
             <RouterView />
           </Transition>
 
-          <!-- TODO: Fix fallback not triggering when lazy loading the current view -->
           <template #fallback>
             <LoadingFallback />
           </template>
