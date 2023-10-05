@@ -26,7 +26,7 @@ const handleClickOutside = (e: MouseEvent) => {
   <Teleport to="body">
     <Transition name="fade">
       <div
-        v-show="props.show"
+        v-if="props.show"
         :id="props.id"
         tabindex="-1"
         class="fixed inset-0 z-40 flex items-center justify-center w-full h-full px-3 bg-black bg-opacity-50"
