@@ -174,7 +174,11 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       const res = await requests.auth.forgotPassword(email);
-      return { success: true, message: res.message, data: res.data };
+      return {
+        success: true,
+        message: res.message,
+        data: res.data,
+      };
     } catch (error: any) {
       return {
         success: false,
@@ -201,11 +205,37 @@ export const useUserStore = defineStore('user', () => {
 
     try {
       const res = await requests.auth.resetPassword(token, password);
-      return { success: true, message: res.message, data: res.data };
+      return {
+        success: true,
+        message: res.message,
+        data: res.data,
+      };
     } catch (error: any) {
       return {
         success: false,
         message: error.response.status === 400 ? 'Invalid password' : error.response.data.message,
+        data: null,
+      };
+    }
+  };
+
+  /**
+   * Verifies the user with the given token.
+   * @param token The token to verify the user.
+   * @returns A promise that resolves to an IAPIResponse object.
+   */
+  const verifyUser = async (token: string): Promise<IAPIResponse> => {
+    try {
+      const res = await requests.user.verifyUser(token);
+      return {
+        success: true,
+        message: res.message,
+        data: res.data,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.response.data.message,
         data: null,
       };
     }
@@ -222,5 +252,6 @@ export const useUserStore = defineStore('user', () => {
     register,
     forgotPassword,
     changePassword,
+    verifyUser,
   };
 });
