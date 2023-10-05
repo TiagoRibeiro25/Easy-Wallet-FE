@@ -110,6 +110,28 @@ export const useUserStore = defineStore('user', () => {
   };
 
   /**
+   * Logs out the current user.
+   * @returns A Promise that resolves to an IAPIResponse object.
+   */
+  const logout = async (): Promise<IAPIResponse> => {
+    try {
+      const res = await requests.auth.logout();
+      user.value = undefined;
+      return {
+        success: true,
+        message: res.message,
+        data: res.data,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: "Couldn't log out",
+        data: null,
+      };
+    }
+  };
+
+  /**
    * Registers a new user with the provided email, display name, and password.
    * @param email The email address of the user to register.
    * @param displayName The display name of the user to register.
@@ -249,6 +271,7 @@ export const useUserStore = defineStore('user', () => {
     isUserLoggedIn,
     getUser,
     login,
+    logout,
     register,
     forgotPassword,
     changePassword,
