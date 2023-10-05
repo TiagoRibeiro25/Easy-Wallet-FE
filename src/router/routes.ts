@@ -72,6 +72,14 @@ const routes: readonly RouteRecordRaw[] = [
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
         },
       },
+      {
+        path: "verify-user/:token",
+        name: "VerifyUser",
+        component: () => import("@/views/Auth/_components/VerifyUser.vue"),
+        beforeEnter: (_, __, next) => {
+          validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
+        }
+      }
     ],
   },
   {
