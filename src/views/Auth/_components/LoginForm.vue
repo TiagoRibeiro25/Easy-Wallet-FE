@@ -102,7 +102,7 @@ const handleSubmit = async (): Promise<void> => {
           :icon="LoginIcon"
           icon-position="left"
           :disabled="loading"
-          class="px-6 bg-quaternaryColor text-quinaryColor hover:opacity-80 focus:border focus:border-primaryColor dark:focus:border-septenaryColor disabled:cursor-default disabled:opacity-50"
+          class="px-6 border border-quaternaryColor bg-quaternaryColor text-quinaryColor hover:opacity-80 focus:border-primaryColor dark:focus:border-septenaryColor disabled:cursor-default disabled:opacity-50"
         >
           <template v-slot:default>
             <span class="font-medium"> Sign In </span>
