@@ -7,6 +7,14 @@ export interface IUser {
   createdAt: string;
 }
 
+export interface ICategory {
+  id: number;
+  name: string;
+  icon_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export type NotificationType = 'success' | 'error' | 'warning' | 'info';
 
 export interface INotification {
