@@ -5,9 +5,10 @@ import EditIcon from '@/components/Icons/edit-icon.vue';
 import { useNotificationsStore } from '@/stores/notifications';
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
 const userStore = useUserStore();
 const notificationsStore = useNotificationsStore();
@@ -35,6 +36,11 @@ const handleSubmit = async (): Promise<void> => {
     title: 'Authentication',
     message: res.message,
   });
+
+  // If the response was a success, redirect to the login view
+  if (res.success) {
+    await router.push({ name: 'Login' });
+  }
 
   loading.value = false;
 };
