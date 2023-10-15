@@ -2,19 +2,24 @@
 import CustomButton from '@/components/CustomButton.vue';
 import AddIcon from '@/components/Icons/add-icon.vue';
 import LoadingIcon from '@/components/Icons/loading-icon.vue';
+import RenderIcon from '@/components/RenderCategoryIcon.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { type ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
+import ManageCategory from './_components/ManageCategory.vue';
+import NoCategories from './_components/NoCategories.vue';
 
 const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
+const categorySelected = ref<ICategory | null>(null);
 
 watchEffect(() => {
   categoriesStore
     .getAll()
     .then(data => {
       categories.value = data;
+      categorySelected.value = data[0]; // Select first category
     })
     .finally(() => {
       if (loading.value) {
@@ -43,11 +48,20 @@ watchEffect(() => {
         <ul
           class="border-b h-[90%] wrapper overflow-y-auto dark:border-b-tertiaryColor space-y-4 w-full pb-6"
         >
-          <li v-for="category of categories" :key="category.id" class="text-center truncate">
-            {{ category.name }}
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            class="flex items-center space-x-2 cursor-pointer hover:opacity-80"
+            :class="{
+              'text-quaternaryColor': categorySelected?.id === category.id,
+            }"
+            @click="categorySelected = category"
+          >
+            <RenderIcon :iconId="category.iconId" class="w-6 h-6" />
+            <span class="flex-1 text-center truncate">{{ category.name }}</span>
           </li>
 
-          <li v-if="categories.length === 0" class="text-center">No Categories Found</li>
+          <li v-if="categories.length === 0" class="text-center truncate">No Categories Found</li>
         </ul>
         <div class="flex items-center justify-center">
           <CustomButton
@@ -65,7 +79,10 @@ watchEffect(() => {
       </div>
 
       <div class="w-full h-full py-6">
-        <div class="h-full px-6 overflow-y-auto wrapper"></div>
+        <div class="h-full px-6 overflow-y-auto wrapper">
+          <NoCategories v-if="categories.length === 0" />
+          <ManageCategory v-else-if="categorySelected" :category="categorySelected" />
+        </div>
       </div>
     </div>
   </div>

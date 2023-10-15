@@ -73,13 +73,13 @@ const routes: readonly RouteRecordRaw[] = [
         },
       },
       {
-        path: "verify-user/:token",
-        name: "VerifyUser",
-        component: () => import("@/views/Auth/_components/VerifyUser.vue"),
+        path: 'verify-user/:token',
+        name: 'VerifyUser',
+        component: () => import('@/views/Auth/_components/VerifyUser.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-        }
-      }
+        },
+      },
     ],
   },
   {
@@ -135,7 +135,7 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/categories',
     name: 'Categories',
-    component: () => import('@/views/ManageCategoriesView.vue'),
+    component: () => import('@/views/ManageCategories/ManageCategoriesView.vue'),
     beforeEnter: (_, __, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
     },
