@@ -6,20 +6,36 @@ import RenderIcon from '@/components/RenderCategoryIcon.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { type ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
-import ManageCategory from './_components/ManageCategory.vue';
+import { useRouter } from 'vue-router';
 import NoCategories from './_components/NoCategories.vue';
 
+const router = useRouter();
 const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
-const categorySelected = ref<ICategory | null>(null);
+const categorySelected = ref<number>(0);
 
+/**
+ * Updates the selected category and updates the view.
+ * @param {number} categoryId - The ID of the category to be selected.
+ */
+const updateCategorySelected = (categoryId: number) => {
+  categorySelected.value = categoryId;
+  router.push({ name: 'Categories-Category', params: { id: categoryId } });
+};
+
+/**
+ * Watch for changes in the categoriesStore.
+ * When changes occur, it retrieves all categories from the store and sets the categories.value to the retrieved data.
+ * It then selects the first category by calling the updateCategorySelected function with the id of the first category.
+ * Finally, it sets the loading.value to false.
+ */
 watchEffect(() => {
   categoriesStore
     .getAll()
     .then(data => {
       categories.value = data;
-      categorySelected.value = data[0]; // Select first category
+      updateCategorySelected(data[0].id);
     })
     .finally(() => {
       if (loading.value) {
@@ -53,9 +69,9 @@ watchEffect(() => {
             :key="category.id"
             class="flex items-center space-x-2 cursor-pointer hover:opacity-80"
             :class="{
-              'text-quaternaryColor': categorySelected?.id === category.id,
+              'text-quaternaryColor': categorySelected === category.id,
             }"
-            @click="categorySelected = category"
+            @click="updateCategorySelected(category.id)"
           >
             <RenderIcon :iconId="category.iconId" class="w-6 h-6" />
             <span class="flex-1 text-center truncate">{{ category.name }}</span>
@@ -81,7 +97,9 @@ watchEffect(() => {
       <div class="w-full h-full py-6">
         <div class="h-full px-6 overflow-y-auto wrapper">
           <NoCategories v-if="categories.length === 0" />
-          <ManageCategory v-else-if="categorySelected" :category="categorySelected" />
+          <Transition v-else name="main-content">
+            <RouterView />
+          </Transition>
         </div>
       </div>
     </div>

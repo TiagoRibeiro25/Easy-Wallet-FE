@@ -26,5 +26,14 @@ export const useCategoriesStore = defineStore('categories', () => {
     return categories.value;
   };
 
-  return { getAll };
+  /**
+   * Returns a single category object from the categories array based on the provided id.
+   * @param id - The id of the category to retrieve.
+   * @returns The category object with the matching id, or undefined if no match is found.
+   */
+  const getOne = (id: number): ICategory | undefined => {
+    return categories.value.find(category => category.id === id);
+  };
+
+  return { getAll, getOne };
 });

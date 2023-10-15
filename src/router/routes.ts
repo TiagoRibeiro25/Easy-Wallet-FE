@@ -41,7 +41,7 @@ const routes: readonly RouteRecordRaw[] = [
     },
   },
   {
-    path: '/auth/',
+    path: '/auth',
     name: 'Auth',
     component: () => import('@/views/Auth/AuthView.vue'),
     beforeEnter: (_, __, next) => {
@@ -139,6 +139,16 @@ const routes: readonly RouteRecordRaw[] = [
     beforeEnter: (_, __, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
     },
+    children: [
+      {
+        path: ':id',
+        name: 'Categories-Category',
+        component: () => import('@/views/ManageCategories/_components/ManageCategory.vue'),
+        beforeEnter: (_, __, next) => {
+          validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        },
+      },
+    ],
   },
   {
     path: '/years',

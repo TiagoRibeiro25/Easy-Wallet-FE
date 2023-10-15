@@ -25,13 +25,13 @@ const darkBorder =
       :name="props.name.toLowerCase() + '-button'"
       class="py-[4px] my-3 w-[175px] sm:w-[200px] justify-center sm:justify-start border text-base disabled:opacity-100"
       :class="
-        routeHook.name === props.route.name
+        routeHook.name?.toString().startsWith(props.route.name)
           ? 'text-quinaryColor dark:border-quaternaryColor bg-quaternaryColor'
           : `dark:text-septenaryColor ${darkBorder} bg-transparent dark:hover:bg-tertiaryColor hover:bg-septenaryColor`
       "
       :icon="props.icon"
       icon-position="left"
-      :disabled="routeHook.name === props.route.name"
+      :disabled="routeHook.name?.toString().startsWith(props.route.name)"
     >
       <template v-slot:default>
         <span class="font-medium sm:ml-2">{{ props.name }}</span>
