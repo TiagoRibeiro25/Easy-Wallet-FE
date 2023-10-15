@@ -17,9 +17,7 @@ const reviews: IReview[] = UsersReviews;
 const screenWidth = ref<number>(window.innerWidth);
 
 onBeforeMount(() => {
-  const resize = () => {
-    screenWidth.value = window.innerWidth;
-  };
+  const resize = () => (screenWidth.value = window.innerWidth);
 
   window.addEventListener('resize', resize);
 
@@ -53,7 +51,7 @@ onBeforeMount(() => {
           class="object-cover object-center mr-4 rounded-full"
         />
         <div class="flex flex-col">
-          <h3 class="">@{{ review.username }}</h3>
+          <h3>@{{ review.username }}</h3>
           <div class="flex flex-row">
             <StarIcon v-for="star in review.rating" :key="star" class="w-4 h-4 mr-1" />
           </div>
