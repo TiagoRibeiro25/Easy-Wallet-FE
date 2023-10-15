@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>No Categories Found</h1>
+    <h1>Add Category</h1>
   </div>
 </template>

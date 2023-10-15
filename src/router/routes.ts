@@ -148,6 +148,14 @@ const routes: readonly RouteRecordRaw[] = [
           validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
         },
       },
+      {
+        path: 'add',
+        name: 'Categories-Add',
+        component: () => import('@/views/ManageCategories/_components/AddCategory.vue'),
+        beforeEnter: (_, __, next) => {
+          validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
+        },
+      },
     ],
   },
   {

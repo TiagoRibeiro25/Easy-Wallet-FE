@@ -7,7 +7,6 @@ import { useCategoriesStore } from '@/stores/categories';
 import { type ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
-import NoCategories from './_components/NoCategories.vue';
 
 const router = useRouter();
 const categoriesStore = useCategoriesStore();
@@ -19,9 +18,9 @@ const categorySelected = ref<number>(0);
  * Updates the selected category and updates the view.
  * @param {number} categoryId - The ID of the category to be selected.
  */
-const updateCategorySelected = (categoryId: number) => {
+const updateCategorySelected = async (categoryId: number): Promise<void> => {
   categorySelected.value = categoryId;
-  router.push({ name: 'Categories-Category', params: { id: categoryId } });
+  await router.push({ name: 'Categories-Category', params: { id: categoryId } });
 };
 
 /**
@@ -35,7 +34,11 @@ watchEffect(() => {
     .getAll()
     .then(data => {
       categories.value = data;
-      updateCategorySelected(data[0].id);
+      if (data.length > 0) {
+        updateCategorySelected(data[0].id);
+      } else {
+        router.push({ name: 'Categories-Add' });
+      }
     })
     .finally(() => {
       if (loading.value) {
@@ -80,24 +83,26 @@ watchEffect(() => {
           <li v-if="categories.length === 0" class="text-center truncate">No Categories Found</li>
         </ul>
         <div class="flex items-center justify-center">
-          <CustomButton
-            id="add-category-button"
-            name="add-category-button"
-            :icon="AddIcon"
-            icon-position="left"
-            class="shadow-none hover:text-quaternaryColor"
-          >
-            <template v-slot:default>
-              <span> Add Category </span>
-            </template>
-          </CustomButton>
+          <RouterLink :to="{ name: 'Categories-Add' }">
+            <CustomButton
+              id="add-category-button"
+              name="add-category-button"
+              :icon="AddIcon"
+              icon-position="left"
+              class="shadow-none hover:text-quaternaryColor"
+              @click="() => (categorySelected = 0)"
+            >
+              <template v-slot:default>
+                <span> Add Category </span>
+              </template>
+            </CustomButton>
+          </RouterLink>
         </div>
       </div>
 
       <div class="w-full h-full py-6">
         <div class="h-full px-6 overflow-y-auto wrapper">
-          <NoCategories v-if="categories.length === 0" />
-          <Transition v-else name="main-content">
+          <Transition name="fade">
             <RouterView />
           </Transition>
         </div>
