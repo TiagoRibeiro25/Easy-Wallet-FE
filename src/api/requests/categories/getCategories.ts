@@ -4,7 +4,13 @@ import { type ICategory } from '../../../types';
 import api from '../../axios.config';
 
 interface IResponse extends IAPIResponse {
-  data: ICategory[];
+  data: {
+    id: number;
+    name: string;
+    icon_id: number;
+    created_at: string;
+    updated_at: string;
+  }[];
 }
 
 export interface IGetCategoriesData extends IAPIResponse {
@@ -18,6 +24,12 @@ export default async (): Promise<IGetCategoriesData> => {
   return {
     success: data.success,
     message: data.message,
-    data: data.data,
+    data: data.data.map(category => ({
+      id: category.id,
+      name: category.name,
+      iconId: category.icon_id,
+      createdAt: category.created_at,
+      updatedAt: category.updated_at,
+    })),
   };
 };
