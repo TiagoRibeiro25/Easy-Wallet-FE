@@ -50,7 +50,7 @@ const routes: readonly RouteRecordRaw[] = [
     children: [
       {
         path: 'login',
-        name: 'Login',
+        name: 'Auth-Login',
         component: () => import('@/views/Auth/_components/LoginForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -58,7 +58,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'register',
-        name: 'Register',
+        name: 'Auth-Register',
         component: () => import('@/views/Auth/_components/RegisterForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -66,7 +66,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'change-password/:token',
-        name: 'ChangePassword',
+        name: 'Auth-ChangePassword',
         component: () => import('@/views/Auth/_components/ChangePasswordForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -74,7 +74,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'verify-user/:token',
-        name: 'VerifyUser',
+        name: 'Auth-VerifyUser',
         component: () => import('@/views/Auth/_components/VerifyUser.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });

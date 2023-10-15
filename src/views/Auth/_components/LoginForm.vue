@@ -122,7 +122,7 @@ const handleSubmit = async (): Promise<void> => {
       </span>
       <span>
         <RouterLink
-          :to="{ name: 'Register' }"
+          :to="{ name: 'Auth-Register' }"
           class="transition-all duration-300 ease-in-out opacity-50 hover:opacity-100 hover:underline"
         >
           Don't have an account?

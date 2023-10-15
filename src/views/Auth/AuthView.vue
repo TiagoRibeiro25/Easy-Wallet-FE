@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+
 interface INavLink {
   name: string;
-  path: string;
 }
 
-const navLinks: INavLink[] = [
-  { name: 'Login', path: '/auth/login' },
-  { name: 'Register', path: '/auth/register' },
-];
+const routeHook = useRoute();
+
+const navLinks: INavLink[] = [{ name: 'Auth-Login' }, { name: 'Auth-Register' }];
 </script>
 
 <template>
@@ -16,17 +16,19 @@ const navLinks: INavLink[] = [
       <RouterLink
         v-for="link in navLinks"
         :key="link.name"
-        :to="link.path"
+        :to="{ name: link.name }"
         class="flex-1 px-4 py-2 text-center transition-all duration-300 ease-in-out border border-octonaryColor"
         :class="{
-          'bg-quaternaryColor text-black border-quaternaryColor': $route.path === link.path,
-          'dark:border-tertiaryColor dark:hover:bg-tertiaryColor': $route.path !== link.path,
-          'rounded-l-lg': link.path === navLinks[0].path,
-          'rounded-r-lg': link.path === navLinks[1].path,
+          'bg-quaternaryColor text-black border-quaternaryColor':
+            routeHook.name?.toString() === link.name,
+          'dark:border-tertiaryColor dark:hover:bg-tertiaryColor':
+            routeHook.name?.toString() !== link.name,
+          'rounded-l-lg': link.name === navLinks[0].name,
+          'rounded-r-lg': link.name === navLinks[1].name,
         }"
         draggable="false"
       >
-        {{ link.name }}
+        {{ link.name.split('-')[1] }}
       </RouterLink>
     </nav>
 

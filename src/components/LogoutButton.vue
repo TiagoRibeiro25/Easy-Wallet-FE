@@ -40,7 +40,7 @@ const handleConfirm = async () => {
   loading.value = false;
   showModal.value = false;
 
-  await router.push({ name: 'Login' });
+  await router.push({ name: 'Auth-Login' });
 };
 </script>
 
