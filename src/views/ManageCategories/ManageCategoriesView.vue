@@ -12,7 +12,7 @@ const router = useRouter();
 const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
-const categorySelected = ref<number>(0);
+const categorySelected = ref<number>(0); // id of the selected category (0 = no category selected)
 
 /**
  * Updates the selected category and updates the view.
@@ -23,28 +23,25 @@ const updateCategorySelected = async (categoryId: number): Promise<void> => {
   await router.push({ name: 'Categories-Category', params: { id: categoryId } });
 };
 
+//TODO: Figure why the user can't navigate to a different route if a category is selected. (but it can navigate to add category)
+
 /**
  * Watch for changes in the categoriesStore.
  * When changes occur, it retrieves all categories from the store and sets the categories.value to the retrieved data.
  * It then selects the first category by calling the updateCategorySelected function with the id of the first category.
  * Finally, it sets the loading.value to false.
  */
-watchEffect(() => {
-  categoriesStore
-    .getAll()
-    .then(data => {
-      categories.value = data;
-      if (data.length > 0) {
-        updateCategorySelected(data[0].id);
-      } else {
-        router.push({ name: 'Categories-Add' });
-      }
-    })
-    .finally(() => {
-      if (loading.value) {
-        loading.value = false;
-      }
-    });
+// TODO: Investigate why this watchEffect is executing twice.
+watchEffect(async () => {
+  categories.value = await categoriesStore.getAll();
+
+  if (categories.value.length > 0) {
+    await updateCategorySelected(categories.value[0].id);
+  } else {
+    await router.push({ name: 'Categories-Add' });
+  }
+
+  loading.value = false;
 });
 </script>
 
@@ -71,9 +68,7 @@ watchEffect(() => {
             v-for="category in categories"
             :key="category.id"
             class="flex items-center space-x-2 cursor-pointer hover:opacity-80"
-            :class="{
-              'text-quaternaryColor': categorySelected === category.id,
-            }"
+            :class="{ 'text-quaternaryColor': categorySelected === category.id }"
             @click="updateCategorySelected(category.id)"
           >
             <RenderIcon :iconId="category.iconId" class="w-6 h-6" />

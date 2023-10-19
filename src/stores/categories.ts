@@ -32,7 +32,7 @@ export const useCategoriesStore = defineStore('categories', () => {
    * @returns The category object with the matching id, or undefined if no match is found.
    */
   const getOne = (id: number): ICategory | undefined => {
-    return categories.value.find(category => category.id === id);
+    return categories.value.find((category: ICategory) => category.id === id);
   };
 
   return { getAll, getOne };
