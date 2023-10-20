@@ -7,7 +7,7 @@ interface INavLink {
 
 const routeHook = useRoute();
 
-const navLinks: INavLink[] = [{ name: 'Auth-Login' }, { name: 'Auth-Register' }];
+const navLinks: INavLink[] = [{ name: 'Login' }, { name: 'Register' }];
 </script>
 
 <template>
@@ -28,7 +28,7 @@ const navLinks: INavLink[] = [{ name: 'Auth-Login' }, { name: 'Auth-Register' }]
         }"
         draggable="false"
       >
-        {{ link.name.split('-')[1] }}
+        {{ link.name }}
       </RouterLink>
     </nav>
 

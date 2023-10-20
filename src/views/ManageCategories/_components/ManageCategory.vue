@@ -14,7 +14,7 @@ watchEffect(() => {
   category.value = categoriesStore.getOne(+categoryId);
 
   if (!category.value) {
-    router.push({ name: 'Categories-Add' });
+    router.push({ name: 'AddCategory' });
   }
 });
 </script>

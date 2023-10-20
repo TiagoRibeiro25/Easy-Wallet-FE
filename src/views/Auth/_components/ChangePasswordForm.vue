@@ -39,7 +39,7 @@ const handleSubmit = async (): Promise<void> => {
 
   // If the response was a success, redirect to the login view
   if (res.success) {
-    await router.push({ name: 'Auth-Login' });
+    await router.push({ name: 'Login' });
   }
 
   loading.value = false;

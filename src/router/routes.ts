@@ -74,7 +74,7 @@ const routes: readonly RouteRecordRaw[] = [
     children: [
       {
         path: 'login',
-        name: 'Auth-Login',
+        name: 'Login',
         component: () => import('@/views/Auth/_components/LoginForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -83,7 +83,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'register',
-        name: 'Auth-Register',
+        name: 'Register',
         component: () => import('@/views/Auth/_components/RegisterForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -92,7 +92,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'change-password/:token',
-        name: 'Auth-ChangePassword',
+        name: 'ChangePassword',
         component: () => import('@/views/Auth/_components/ChangePasswordForm.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -101,7 +101,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'verify-user/:token',
-        name: 'Auth-VerifyUser',
+        name: 'VerifyUser',
         component: () => import('@/views/Auth/_components/VerifyUser.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
@@ -182,7 +182,7 @@ const routes: readonly RouteRecordRaw[] = [
     children: [
       {
         path: ':id',
-        name: 'Categories-Category',
+        name: 'Category',
         component: () => import('@/views/ManageCategories/_components/ManageCategory.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
@@ -190,7 +190,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'add',
-        name: 'Categories-Add',
+        name: 'AddCategory',
         component: () => import('@/views/ManageCategories/_components/AddCategory.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });

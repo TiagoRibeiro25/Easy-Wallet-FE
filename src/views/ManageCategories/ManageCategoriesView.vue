@@ -20,10 +20,13 @@ const categorySelected = ref<number>(0); // id of the selected category (0 = no 
  */
 const updateCategorySelected = async (categoryId: number): Promise<void> => {
   categorySelected.value = categoryId;
-  await router.push({ name: 'Categories-Category', params: { id: categoryId } });
+  await router.push({ name: 'Category', params: { id: categoryId } });
 };
 
-//TODO: Figure why the user can't navigate to a different route if a category is selected. (but it can navigate to add category)
+//TODO: Figure why the user can't navigate to a different route if a category is selected.
+// the user can navigate to add category
+// the user can only navigate to other routes if the category is not selected
+// it only happens if the user is already authenticated when the application loads (wth?)
 
 /**
  * Watch for changes in the categoriesStore.
@@ -31,14 +34,13 @@ const updateCategorySelected = async (categoryId: number): Promise<void> => {
  * It then selects the first category by calling the updateCategorySelected function with the id of the first category.
  * Finally, it sets the loading.value to false.
  */
-// TODO: Investigate why this watchEffect is executing twice.
 watchEffect(async () => {
   categories.value = await categoriesStore.getAll();
 
   if (categories.value.length > 0) {
     await updateCategorySelected(categories.value[0].id);
   } else {
-    await router.push({ name: 'Categories-Add' });
+    await router.push({ name: 'AddCategory' });
   }
 
   loading.value = false;
@@ -78,7 +80,7 @@ watchEffect(async () => {
           <li v-if="categories.length === 0" class="text-center truncate">No Categories Found</li>
         </ul>
         <div class="flex items-center justify-center">
-          <RouterLink :to="{ name: 'Categories-Add' }">
+          <RouterLink :to="{ name: 'AddCategory' }">
             <CustomButton
               id="add-category-button"
               name="add-category-button"
