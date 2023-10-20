@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useDark } from '@vueuse/core';
-import { onBeforeMount, ref, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import FooterLayout from './components/FooterLayout.vue';
 import LoadingOverlay from './components/LoadingOverlay.vue';
 import NavbarLayout from './components/NavbarLayout/NavbarLayout.vue';
@@ -14,10 +13,6 @@ const userStore = useUserStore();
 const isLoading = ref<boolean>(true);
 const errorOnLoading = ref<boolean>(false);
 const isUserLogged = ref<boolean>(false);
-
-onBeforeMount(() => {
-  useDark(); // Add the dark class to the body (if the user has dark mode enabled)
-});
 
 /**
  * Watches for changes in the user store and updates the UI accordingly.
@@ -56,10 +51,7 @@ watchEffect(() => {
 
       <div
         class="flex-col flex-grow w-full max-w-screen-xl px-4 mx-auto"
-        :class="{
-          'pt-44 pb-16': isUserLogged,
-          'sm:pt-28': isUserLogged && isUserOnDesktop(),
-        }"
+        :class="{ 'pt-44 pb-16': isUserLogged, 'sm:pt-28': isUserLogged && isUserOnDesktop() }"
       >
         <Suspense>
           <Transition name="main-content">

@@ -5,6 +5,13 @@
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Easy Wallet</title>
+
+    <script>
+      // Check if the user prefers dark mode, if so add class dark to the html tag
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
   <body class="wrapper">
     <div id="app"></div>
