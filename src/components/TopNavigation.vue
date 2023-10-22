@@ -5,6 +5,12 @@
  * @returns {string} The formatted route name.
  */
 const formatRouteName = (name: string | undefined): string => {
+  const nameSplit = name?.split('-');
+
+  if (nameSplit?.length === 2) {
+    name = nameSplit[1];
+  }
+
   return name?.split(/(?=[A-Z])/).join(' ') ?? '';
 };
 </script>

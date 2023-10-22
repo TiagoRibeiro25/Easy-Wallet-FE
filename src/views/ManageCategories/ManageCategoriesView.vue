@@ -29,9 +29,9 @@ watchEffect(async () => {
   categories.value = await categoriesStore.getAll();
 
   if (categories.value.length > 0) {
-    await router.push({ name: 'Category', params: { id: categories.value[0].id } });
+    await router.push({ name: 'Categories-Category', params: { id: categories.value[0].id } });
   } else {
-    await router.push({ name: 'AddCategory' });
+    await router.push({ name: 'Categories-AddCategory' });
   }
 
   loading.value = false;
@@ -59,11 +59,12 @@ watchEffect(async () => {
         >
           <li v-for="category in categories" :key="category.id">
             <RouterLink
-              :to="{ name: 'Category', params: { id: category.id } }"
+              :to="{ name: 'Categories-Category', params: { id: category.id } }"
               class="flex items-center space-x-2 hover:opacity-80"
               :class="{
                 'text-quaternaryColor':
-                  route.name === 'Category' && route.params.id === category.id.toString(),
+                  route.name === 'Categories-Category' &&
+                  route.params.id === category.id.toString(),
               }"
             >
               <RenderIcon :iconId="category.iconId" class="w-6 h-6" />
@@ -74,13 +75,14 @@ watchEffect(async () => {
           <li v-if="categories.length === 0" class="text-center truncate">No Categories Found</li>
         </ul>
         <div class="flex items-center justify-center">
-          <RouterLink :to="{ name: 'AddCategory' }">
+          <RouterLink :to="{ name: 'Categories-AddCategory' }">
             <CustomButton
               id="add-category-button"
               name="add-category-button"
               :icon="AddIcon"
               icon-position="left"
               class="shadow-none hover:text-quaternaryColor"
+              :class="{ 'text-quaternaryColor': route.name === 'Categories-AddCategory' }"
             >
               <template v-slot:default>
                 <span> Add Category </span>

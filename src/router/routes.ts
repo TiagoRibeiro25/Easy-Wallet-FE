@@ -194,7 +194,7 @@ const routes: readonly RouteRecordRaw[] = [
     children: [
       {
         path: ':id',
-        name: 'Category',
+        name: 'Categories-Category',
         component: () => import('@/views/ManageCategories/_components/ManageCategory.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
@@ -202,7 +202,7 @@ const routes: readonly RouteRecordRaw[] = [
       },
       {
         path: 'add',
-        name: 'AddCategory',
+        name: 'Categories-AddCategory',
         component: () => import('@/views/ManageCategories/_components/AddCategory.vue'),
         beforeEnter: (_, __, next) => {
           validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
