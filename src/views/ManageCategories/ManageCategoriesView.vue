@@ -28,11 +28,10 @@ const categories = ref<ICategory[]>([]);
 watchEffect(async () => {
   categories.value = await categoriesStore.getAll();
 
-  if (categories.value.length > 0) {
-    await router.push({ name: 'Categories-Category', params: { id: categories.value[0].id } });
-  } else {
-    await router.push({ name: 'Categories-AddCategory' });
-  }
+  await router.push({
+    name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
+    params: { id: categories.value[0].id },
+  });
 
   loading.value = false;
 });
