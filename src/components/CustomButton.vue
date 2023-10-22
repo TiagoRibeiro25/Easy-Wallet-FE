@@ -8,10 +8,10 @@ interface IProps {
   iconPosition?: 'left' | 'right';
 }
 
-type IEmits = (event: 'click') => void;
+type Emits = (event: 'click') => void;
 
 const props = defineProps<IProps>();
-const emits = defineEmits<IEmits>();
+const emits = defineEmits<Emits>();
 </script>
 
 <template>
