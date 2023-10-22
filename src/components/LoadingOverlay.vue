@@ -9,7 +9,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const EXPECTED_TIME = 40; // seconds
+const EXPECTED_TIME = 50; // seconds
 const time = ref<number>(0);
 
 const interval = setInterval(() => {
