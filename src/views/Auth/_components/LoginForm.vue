@@ -25,6 +25,7 @@ const showForgotPasswordModal = ref<boolean>(false);
  * Sets the loading state to true and displays a notification.
  * Calls the userStore's login method with the email, password and rememberMe values.
  * If the login is unsuccessful, displays an error notification.
+ * If the user cookies are not working as expected, displays an error notification (third party cookies need to be enabled).
  * If the login is successful, displays a success notification and navigates to the Dashboard page.
  */
 const handleSubmit = async (): Promise<void> => {
@@ -37,24 +38,45 @@ const handleSubmit = async (): Promise<void> => {
 
   const res = await userStore.login(email.value, password.value, rememberMe.value);
 
+  // If the login was unsuccessful, display an error notification
   if (!res.success) {
+    const notificationType =
+      res.message === 'Please verify your account. An email has been sent to your email address'
+        ? 'info'
+        : 'error';
+
     notificationsStore.add({
-      type:
-        res.message === 'Please verify your account. An email has been sent to your email address'
-          ? 'info'
-          : 'error',
+      type: notificationType,
       title: 'Authentication',
       message: res.message,
     });
-  } else {
+
+    loading.value = false;
+    return;
+  }
+
+  // Make a request to get the user's data (to check if the user cookies are working as expected)
+  const userDataRes = await userStore.getUser();
+
+  if (!userDataRes) {
     notificationsStore.add({
-      type: 'success',
+      type: 'error',
       title: 'Authentication',
-      message: 'Logged in successfully',
+      message: 'An error occurred while logging in',
     });
 
-    await router.push({ name: 'Dashboard' });
+    loading.value = false;
+    return;
   }
+
+  // If the login was successful, display a success notification and navigate to the Dashboard page
+  notificationsStore.add({
+    type: 'success',
+    title: 'Authentication',
+    message: 'Logged in successfully',
+  });
+
+  await router.push({ name: 'Dashboard' });
 
   loading.value = false;
 };
@@ -130,7 +152,6 @@ const handleSubmit = async (): Promise<void> => {
       </span>
     </div>
 
-    <!-- Forgot Password Modal -->
     <ForgotPasswordModal v-model="showForgotPasswordModal" />
   </div>
 </template>
