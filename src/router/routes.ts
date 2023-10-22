@@ -23,7 +23,16 @@ const validateUser = ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProp
   else next();
 };
 
+let didLoadNotLoggedInViews = false;
+let didLoadLoggedInViews = false;
+
 const loadNotLoggedInViews = () => {
+  if (didLoadNotLoggedInViews) {
+    return;
+  }
+
+  didLoadNotLoggedInViews = true;
+
   import('@/views/Home/HomeView.vue');
   import('@/views/Auth/AuthView.vue');
   import('@/views/Auth/_components/LoginForm.vue');
@@ -37,12 +46,20 @@ const loadNotLoggedInViews = () => {
 };
 
 const loadLoggedInViews = () => {
+  if (didLoadLoggedInViews) {
+    return;
+  }
+
+  didLoadLoggedInViews = true;
+
   import('@/views/DashboardView.vue');
   import('@/views/CalendarView.vue');
   import('@/views/AddExpenseView.vue');
   import('@/views/ManageCategories/ManageCategoriesView.vue');
   import('@/views/YearsView.vue');
   import('@/views/SettingsView.vue');
+  import('@/views/ManageCategories/_components/ManageCategory.vue');
+  import('@/views/ManageCategories/_components/AddCategory.vue');
 };
 
 /**
@@ -172,11 +189,6 @@ const routes: readonly RouteRecordRaw[] = [
     component: () => import('@/views/ManageCategories/ManageCategoriesView.vue'),
     beforeEnter: (_, __, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
-
-      // Load the child views
-      import('@/views/ManageCategories/_components/ManageCategory.vue');
-      import('@/views/ManageCategories/_components/AddCategory.vue');
-
       loadLoggedInViews();
     },
     children: [
