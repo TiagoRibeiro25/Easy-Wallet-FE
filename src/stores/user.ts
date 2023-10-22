@@ -14,9 +14,7 @@ export const useUserStore = defineStore('user', () => {
    * Returns a boolean indicating whether the data has been fetched for the first time.
    * @returns {boolean} A boolean indicating whether the data has been fetched for the first time.
    */
-  const didFetchFirstTime = (): boolean => {
-    return fetchedFirstTime.value;
-  };
+  const didFetchFirstTime = (): boolean => fetchedFirstTime.value;
 
   /**
    * Updates the fetchedFirstTime value to true.
@@ -30,9 +28,7 @@ export const useUserStore = defineStore('user', () => {
    * Returns a boolean indicating whether an error occurred.
    * @returns {boolean} A boolean indicating whether an error occurred.
    */
-  const didErrorOccur = (): boolean => {
-    return didAnErrorOccur.value;
-  };
+  const didErrorOccur = (): boolean => didAnErrorOccur.value;
 
   /**
    * Sets the value of `didAnErrorOccur` to `true`.
@@ -45,9 +41,7 @@ export const useUserStore = defineStore('user', () => {
    * Checks if a user is currently logged in.
    * @returns {boolean} - True if a user is logged in, false otherwise.
    */
-  const isUserLoggedIn = (): boolean => {
-    return !!user.value;
-  };
+  const isUserLoggedIn = (): boolean => !!user.value;
 
   /**
    * Retrieves the logged-in user from the server.
@@ -64,9 +58,9 @@ export const useUserStore = defineStore('user', () => {
           updateDidErrorOccur();
         }
       }
-
-      return user.value;
     }
+
+    return user.value;
   };
 
   /**

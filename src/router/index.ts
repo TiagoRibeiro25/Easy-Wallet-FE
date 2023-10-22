@@ -8,15 +8,13 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, _, next) => {
+router.beforeEach(async (_, __, next) => {
   const userStore = useUserStore();
 
-  if (userStore.didFetchFirstTime()) {
-    return next();
+  if (!userStore.didFetchFirstTime()) {
+    await userStore.getUser();
+    userStore.updateFetchedFirstTime();
   }
-
-  await userStore.getUser();
-  userStore.updateFetchedFirstTime();
 
   return next();
 });
