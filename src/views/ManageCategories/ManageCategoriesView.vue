@@ -14,11 +14,6 @@ const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
 
-//TODO: Figure why the user can't navigate to a different route if a category is selected.
-// the user can navigate to add category
-// the user can only navigate to other routes if the category is not selected
-// it only happens if the user is already authenticated when the application loads (wth?)
-
 /**
  * Watch for changes in the categoriesStore.
  * When changes occur, it retrieves all categories from the store and sets the categories.value to the retrieved data.
