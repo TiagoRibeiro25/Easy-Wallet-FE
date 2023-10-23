@@ -104,12 +104,12 @@ watchEffect(async () => {
         </div>
       </nav>
 
-      <div class="h-full max-w-full lg:max-w-[calc(100%-250px)] lg:pt-6 pb-6">
+      <div class="h-full w-full lg:max-w-[calc(100%-250px)] pt-6 pb-6">
         <div class="h-full px-6 overflow-y-auto wrapper">
           <!-- Mobile Navigation -->
           <div
             v-if="categories.length > 0 && route.name === 'Categories-Category'"
-            class="flex flex-row justify-center my-6 space-x-2 border-b lg:hidden dark:border-tertiaryColor dark:bg-secondaryColor"
+            class="flex flex-row justify-center mb-6 space-x-2 border-b lg:hidden dark:border-tertiaryColor dark:bg-secondaryColor"
           >
             <select
               id="category-select"
@@ -139,9 +139,12 @@ watchEffect(async () => {
             </RouterLink>
           </div>
 
-          <!-- TODO: Fix this button now being centered (the div doesn't have full width for some reason) -->
           <!-- TODO: Handle if the user doesn't have any categories -->
-          <div v-else class="w-full my-6 border-b dark:border-tertiaryColor dark:bg-secondaryColor">
+
+          <div
+            v-else
+            class="flex justify-center w-full pb-1 mb-6 border-b lg:hidden dark:border-tertiaryColor dark:bg-secondaryColor"
+          >
             <RouterLink
               :to="{ name: 'Categories-Category', params: { id: categories[0]?.id } }"
               @click="currentCategory = categories[0]"
@@ -152,7 +155,7 @@ watchEffect(async () => {
                 class="scale-110 shadow-none hover:text-quaternaryColor"
               >
                 <template v-slot:default>
-                  <span> Show Categories </span>
+                  <span class="text-sm"> Show Categories </span>
                 </template>
               </CustomButton>
             </RouterLink>

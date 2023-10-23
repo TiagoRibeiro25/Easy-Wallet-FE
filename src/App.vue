@@ -41,7 +41,7 @@ watchEffect(() => {
 
     <main
       class="flex flex-col w-full h-screen wrapper"
-      :class="{ 'w-full pt-28': !isUserLogged, 'overflow-y-auto': isUserLogged }"
+      :class="isUserLogged ? 'overflow-y-auto' : 'w-full pt-28'"
     >
       <TopNavigation
         v-if="isUserLogged"
