@@ -16,7 +16,7 @@ const emits = defineEmits<Emits>();
 
 <template>
   <button
-    class="flex items-center px-4 py-2 space-x-2 font-semibold transition duration-200 ease-in-out rounded-md shadow-sm hover:bg-opacity-90 focus:outline-none"
+    class="flex items-center px-4 py-2 space-x-2 font-semibold transition duration-200 ease-in-out rounded-md hover:bg-opacity-90 focus:outline-none"
     :id="props.id || props.name"
     :type="props.type || 'button'"
     :disabled="props.disabled || false"
