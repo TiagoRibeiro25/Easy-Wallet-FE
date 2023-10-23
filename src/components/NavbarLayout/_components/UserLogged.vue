@@ -34,7 +34,7 @@ const getMobileNavTitle = computed(() => {
 <template>
   <!-- Desktop Navbar -->
   <nav
-    class="hidden w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto"
+    class="hidden w-[250px] bg-senaryColor dark:bg-secondaryColor h-screen flex-col justify-start items-center p-3 border-r border-septenaryColor dark:border-tertiaryColor wrapper overflow-y-auto z-30"
     :class="isUserOnDesktop() ? 'sm:flex' : ''"
     aria-label="Main Desktop Navigation"
   >
@@ -86,19 +86,25 @@ const getMobileNavTitle = computed(() => {
 
   <!-- Mobile Navbar -->
   <nav
-    class="w-full fixed flex flex-col h-[120px] border-b bg-senaryColor dark:bg-secondaryColor border-septenaryColor dark:border-tertiaryColor"
+    class="w-full fixed flex flex-col h-[120px] border-b bg-senaryColor dark:bg-secondaryColor border-septenaryColor dark:border-tertiaryColor z-30"
     :class="isUserOnDesktop() ? 'sm:hidden' : ''"
     aria-label="Main Mobile Navigation"
   >
     <div class="flex flex-wrap items-center justify-between px-4 h-1/2">
       <RouterLink :to="{ name: 'Settings' }">
-        <SettingsIcon class="w-11 h-11" />
+        <SettingsIcon
+          class="w-11 h-11"
+          :class="{ 'text-quaternaryColor': $route.name === 'Settings' }"
+        />
       </RouterLink>
 
       <span class="self-center text-2xl"> {{ getMobileNavTitle }} </span>
 
       <RouterLink :to="{ name: 'GetHelp' }">
-        <GetHelpIcon class="w-11 h-11" />
+        <GetHelpIcon
+          class="w-11 h-11"
+          :class="{ 'text-quaternaryColor': $route.name === 'GetHelp' }"
+        />
       </RouterLink>
     </div>
     <div class="flex flex-row px-4 h-1/2">

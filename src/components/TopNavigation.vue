@@ -17,7 +17,7 @@ const formatRouteName = (name: string | undefined): string => {
 
 <template>
   <nav
-    class="fixed w-full p-4 border-b dark:bg-secondaryColor dark:border-tertiaryColor bg-senaryColor border-septenaryColor"
+    class="fixed z-30 w-full p-4 border-b dark:bg-secondaryColor dark:border-tertiaryColor bg-senaryColor border-septenaryColor"
   >
     {{ formatRouteName($route.name?.toString()) }}
   </nav>

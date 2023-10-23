@@ -13,6 +13,7 @@ const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
+const currentCategory = ref<ICategory | undefined>();
 
 /**
  * Watch for changes in the categoriesStore.
@@ -25,10 +26,24 @@ watchEffect(async () => {
 
   await router.push({
     name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
-    params: { id: categories.value[0].id },
+    params: { id: currentCategory.value?.id ?? categories.value[0]?.id ?? 0 },
   });
 
+  currentCategory.value = categories.value.find(
+    (category: ICategory) => category.id.toString() === route.params.id,
+  );
+
   loading.value = false;
+});
+
+// Watches for changes in the current category and navigates to the corresponding category page.
+watchEffect(async () => {
+  if (currentCategory.value) {
+    await router.push({
+      name: 'Categories-Category',
+      params: { id: currentCategory.value.id },
+    });
+  }
 });
 </script>
 
@@ -45,8 +60,9 @@ watchEffect(async () => {
       v-else
       class="flex flex-row min-h-[500px] h-[80vh] border shadow-sm rounded-2xl bg-senaryColor dark:bg-secondaryColor dark:border-tertiaryColor"
     >
-      <div
-        class="min-w-[250px] max-w-[250px] p-6 space-y-3 border-r rounded-2xl dark:border-tertiaryColor dark:shadow-2xl"
+      <!-- Desktop navigation -->
+      <nav
+        class="lg:block hidden min-w-[250px] max-w-[250px] p-6 space-y-3 border-r rounded-2xl dark:border-tertiaryColor dark:shadow-2xl"
       >
         <ul
           class="border-b h-[90%] wrapper overflow-y-auto dark:border-b-tertiaryColor space-y-4 w-full pb-6"
@@ -60,6 +76,7 @@ watchEffect(async () => {
                   route.name === 'Categories-Category' &&
                   route.params.id === category.id.toString(),
               }"
+              @click="currentCategory = category"
             >
               <RenderIcon :iconId="category.iconId" class="w-6 h-6" />
               <span class="flex-1 text-center truncate">{{ category.name }}</span>
@@ -71,12 +88,13 @@ watchEffect(async () => {
         <div class="flex items-center justify-center">
           <RouterLink :to="{ name: 'Categories-AddCategory' }">
             <CustomButton
-              id="add-category-button"
-              name="add-category-button"
+              id="desktop-add-category-button"
+              name="desktop-add-category-button"
               :icon="AddIcon"
               icon-position="left"
               class="shadow-none hover:text-quaternaryColor"
               :class="{ 'text-quaternaryColor': route.name === 'Categories-AddCategory' }"
+              @click="currentCategory = undefined"
             >
               <template v-slot:default>
                 <span> Add Category </span>
@@ -84,10 +102,63 @@ watchEffect(async () => {
             </CustomButton>
           </RouterLink>
         </div>
-      </div>
+      </nav>
 
-      <div class="w-full h-full py-6">
+      <div class="h-full max-w-full lg:max-w-[calc(100%-250px)] lg:pt-6 pb-6">
         <div class="h-full px-6 overflow-y-auto wrapper">
+          <!-- Mobile Navigation -->
+          <div
+            v-if="categories.length > 0 && route.name === 'Categories-Category'"
+            class="flex flex-row justify-center my-6 space-x-2 border-b lg:hidden dark:border-tertiaryColor dark:bg-secondaryColor"
+          >
+            <select
+              id="category-select"
+              v-model="currentCategory"
+              class="w-full h-10 px-4 py-2 text-base font-semibold text-center bg-transparent cursor-pointer text-quaternaryColor hover:opacity-80"
+            >
+              <option
+                v-for="category in categories"
+                :key="category.id"
+                :value="category"
+                class="text-septenaryColor"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+
+            <RouterLink :to="{ name: 'Categories-AddCategory' }" class="w-[50px]">
+              <CustomButton
+                id="mobile-add-category-button"
+                name="mobile-add-category-button"
+                :icon="AddIcon"
+                icon-position="left"
+                class="scale-110 shadow-none hover:text-quaternaryColor"
+                @click="currentCategory = undefined"
+              >
+              </CustomButton>
+            </RouterLink>
+          </div>
+
+          <!-- TODO: Fix this button now being centered (the div doesn't have full width for some reason) -->
+          <!-- TODO: Handle if the user doesn't have any categories -->
+          <div v-else class="w-full my-6 border-b dark:border-tertiaryColor dark:bg-secondaryColor">
+            <RouterLink
+              :to="{ name: 'Categories-Category', params: { id: categories[0]?.id } }"
+              @click="currentCategory = categories[0]"
+            >
+              <CustomButton
+                id="show-category-button"
+                name="show-category-button"
+                class="scale-110 shadow-none hover:text-quaternaryColor"
+              >
+                <template v-slot:default>
+                  <span> Show Categories </span>
+                </template>
+              </CustomButton>
+            </RouterLink>
+          </div>
+
+          <!-- Main Content -->
           <Transition name="fade">
             <RouterView />
           </Transition>
