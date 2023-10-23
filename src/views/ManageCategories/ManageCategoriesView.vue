@@ -26,7 +26,7 @@ watchEffect(async () => {
 
   await router.push({
     name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
-    params: { id: currentCategory.value?.id ?? categories.value[0]?.id ?? 0 },
+    params: { id: categories.value.length > 0 ? categories.value[0]?.id : undefined },
   });
 
   currentCategory.value = categories.value.find(
@@ -139,20 +139,23 @@ watchEffect(async () => {
             </RouterLink>
           </div>
 
-          <!-- TODO: Handle if the user doesn't have any categories -->
-
           <div
             v-else
             class="flex justify-center w-full pb-1 mb-6 border-b lg:hidden dark:border-tertiaryColor dark:bg-secondaryColor"
           >
             <RouterLink
-              :to="{ name: 'Categories-Category', params: { id: categories[0]?.id } }"
+              :to="{
+                name: categories.length === 0 ? '' : 'Categories-Category',
+                params: { id: categories[0]?.id ?? 0 },
+              }"
+              :class="{ 'disabled: opacity-50 cursor-default': categories.length === 0 }"
               @click="currentCategory = categories[0]"
             >
               <CustomButton
                 id="show-category-button"
                 name="show-category-button"
-                class="scale-110 shadow-none hover:text-quaternaryColor"
+                class="scale-110 shadow-none"
+                :class="categories.length === 0 ? 'cursor-default' : 'hover:text-quaternaryColor'"
               >
                 <template v-slot:default>
                   <span class="text-sm"> Show Categories </span>
