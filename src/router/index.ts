@@ -12,8 +12,8 @@ router.beforeEach(async (_, __, next) => {
   const userStore = useUserStore();
 
   if (!userStore.didFetchFirstTime()) {
-    userStore.updateFetchedFirstTime();
     await userStore.getUser();
+    userStore.updateFetchedFirstTime();
   }
 
   return next();
