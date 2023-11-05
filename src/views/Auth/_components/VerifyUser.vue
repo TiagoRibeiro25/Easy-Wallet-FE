@@ -10,7 +10,6 @@ const statusMsg = ref<string>('');
 
 onBeforeMount(async () => {
   const token = route.params.token as string;
-
   const res = await userStore.verifyUser(token);
 
   statusMsg.value = res.message;

@@ -1,11 +1,13 @@
+<script lang="ts">
+interface IProps {
+  status: 'loading' | 'error';
+}
+</script>
+
 <script setup lang="ts">
 import { onUnmounted, ref } from 'vue';
 import ClockLoadingIcon from './Icons/clock-loading.vue';
 import LogoName from './LogoName.vue';
-
-interface IProps {
-  status: 'loading' | 'error';
-}
 
 const props = defineProps<IProps>();
 

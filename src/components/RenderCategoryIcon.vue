@@ -1,9 +1,11 @@
-<script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
-
+<script lang="ts">
 interface IProps {
   iconId: number;
 }
+</script>
+
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 
 const props = defineProps<IProps>();
 

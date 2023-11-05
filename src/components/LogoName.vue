@@ -1,9 +1,11 @@
-<script setup lang="ts">
-import Logo from '@/assets/logo.svg';
-
+<script lang="ts">
 interface IProps {
   clickable?: boolean; // default: true
 }
+</script>
+
+<script setup lang="ts">
+import Logo from '@/assets/logo.svg';
 
 const props = defineProps<IProps>();
 

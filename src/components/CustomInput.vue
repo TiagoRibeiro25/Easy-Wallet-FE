@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue';
-
+<script lang="ts">
 interface InputProps {
   placeholder?: string;
   type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
@@ -11,6 +9,10 @@ interface InputProps {
   disabled?: boolean;
   autoComplete?: string;
 }
+</script>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue';
 
 const props = defineProps<InputProps>();
 const emits = defineEmits(['update:modelValue']);

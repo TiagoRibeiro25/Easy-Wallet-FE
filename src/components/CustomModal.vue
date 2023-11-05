@@ -1,11 +1,13 @@
-<script setup lang="ts">
-import CloseIconVue from './Icons/close-icon.vue';
-
+<script lang="ts">
 interface IProps {
   id: string;
   title: string;
   show: boolean;
 }
+</script>
+
+<script setup lang="ts">
+import CloseIconVue from './Icons/close-icon.vue';
 
 const props = defineProps<IProps>();
 const emits = defineEmits(['close']);

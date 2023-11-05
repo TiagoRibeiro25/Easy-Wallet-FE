@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-
+<script lang="ts">
 interface IProps {
   id: string;
   text: string;
@@ -8,6 +6,10 @@ interface IProps {
   required?: boolean;
   disabled?: boolean;
 }
+</script>
+
+<script setup lang="ts">
+import { ref } from 'vue';
 
 const props = defineProps<IProps>();
 const emits = defineEmits(['update:modelValue']);

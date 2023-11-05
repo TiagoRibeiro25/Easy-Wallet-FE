@@ -1,11 +1,13 @@
-<script setup lang="ts">
-import AuthIcon from './Icons/auth-icon.vue';
-
+<script lang="ts">
 interface IProps {
   text?: string;
   hideTextOnMobile?: boolean;
   form?: 'login' | 'register';
 }
+</script>
+
+<script setup lang="ts">
+import AuthIcon from './Icons/auth-icon.vue';
 
 const props = defineProps<IProps>();
 </script>

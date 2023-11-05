@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts">
 interface IProps {
   id?: string;
   name: string;
@@ -9,7 +9,9 @@ interface IProps {
 }
 
 type Emits = (event: 'click') => void;
+</script>
 
+<script setup lang="ts">
 const props = defineProps<IProps>();
 const emits = defineEmits<Emits>();
 </script>

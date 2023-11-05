@@ -1,15 +1,17 @@
-<script setup lang="ts">
-import StarIcon from '@/components/Icons/star-icon.vue';
-import { useDark } from '@vueuse/core';
-import { onBeforeMount, ref } from 'vue';
-import UsersReviews from './users-reviews.json';
-
+<script lang="ts">
 interface IReview {
   username: string;
   img: string;
   review: string;
   rating: number;
 }
+</script>
+
+<script setup lang="ts">
+import StarIcon from '@/components/Icons/star-icon.vue';
+import { useDark } from '@vueuse/core';
+import { onBeforeMount, ref } from 'vue';
+import UsersReviews from './users-reviews.json';
 
 const isDark = useDark();
 const reviews: IReview[] = UsersReviews;

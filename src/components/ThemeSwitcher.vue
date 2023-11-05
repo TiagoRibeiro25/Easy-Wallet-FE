@@ -1,10 +1,12 @@
-<script setup lang="ts">
-import { useDark, useToggle } from '@vueuse/core';
-import ThemeIcon from './Icons/theme-icon.vue';
-
+<script lang="ts">
 interface IProps {
   showText?: boolean;
 }
+</script>
+
+<script setup lang="ts">
+import { useDark, useToggle } from '@vueuse/core';
+import ThemeIcon from './Icons/theme-icon.vue';
 
 const props = defineProps<IProps>();
 

@@ -1,13 +1,15 @@
-<script setup lang="ts">
-import CustomButton from '@/components/CustomButton.vue';
-import { useRoute } from 'vue-router';
-
+<script lang="ts">
 interface IProps {
   name: string;
   icon?: any;
   route: { name: string; params?: { year: number } };
   customDarkBorder?: 'primary' | 'secondary';
 }
+</script>
+
+<script setup lang="ts">
+import CustomButton from '@/components/CustomButton.vue';
+import { useRoute } from 'vue-router';
 
 const props = defineProps<IProps>();
 const routeHook = useRoute();

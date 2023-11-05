@@ -1,9 +1,11 @@
-<script setup lang="ts">
-import { useRoute } from 'vue-router';
-
+<script lang="ts">
 interface INavLink {
   name: string;
 }
+</script>
+
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
 
 const routeHook = useRoute();
 
