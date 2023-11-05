@@ -10,37 +10,14 @@ export const useUserStore = defineStore('user', () => {
   const didAnErrorOccur = ref(false);
   const user = ref<IUser>();
 
-  /**
-   * Returns a boolean indicating whether the data has been fetched for the first time.
-   * @returns {boolean} A boolean indicating whether the data has been fetched for the first time.
-   */
   const didFetchFirstTime = (): boolean => fetchedFirstTime.value;
 
-  /**
-   * Updates the fetchedFirstTime value to true.
-   * @returns void
-   */
-  const updateFetchedFirstTime = (): void => {
-    fetchedFirstTime.value = true;
-  };
+  const updateFetchedFirstTime = (): boolean => (fetchedFirstTime.value = true);
 
-  /**
-   * Returns a boolean indicating whether an error occurred.
-   * @returns {boolean} A boolean indicating whether an error occurred.
-   */
   const didErrorOccur = (): boolean => didAnErrorOccur.value;
 
-  /**
-   * Sets the value of `didAnErrorOccur` to `true`.
-   */
-  const updateDidErrorOccur = (): void => {
-    didAnErrorOccur.value = true;
-  };
+  const updateDidErrorOccur = (): boolean => (didAnErrorOccur.value = true);
 
-  /**
-   * Checks if a user is currently logged in.
-   * @returns {boolean} - True if a user is logged in, false otherwise.
-   */
   const isUserLoggedIn = (): boolean => !!user.value;
 
   /**
