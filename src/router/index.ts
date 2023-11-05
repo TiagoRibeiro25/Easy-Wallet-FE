@@ -8,7 +8,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (_, __, next) => {
+router.beforeEach(async (_to, _from, next) => {
   const userStore = useUserStore();
 
   if (!userStore.didFetchFirstTime()) {
@@ -16,7 +16,7 @@ router.beforeEach(async (_, __, next) => {
     userStore.updateFetchedFirstTime();
   }
 
-  return next();
+  next();
 });
 
 export default router;

@@ -19,6 +19,9 @@ const isUserLogged = ref<boolean>(false);
  * If the server hasn't responded yet, the loading overlay will be shown.
  */
 watchEffect(() => {
+  isLoading.value = true;
+  errorOnLoading.value = false;
+
   if (!userStore.didFetchFirstTime()) {
     return;
   }

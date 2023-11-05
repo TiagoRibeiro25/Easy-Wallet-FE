@@ -18,9 +18,11 @@ const validateUser = ({ next, fallbackRoute, mustBeLoggedIn }: IValidateUserProp
   const userStore = useUserStore();
   const isUserLoggedIn = userStore.isUserLoggedIn();
 
-  if (mustBeLoggedIn && !isUserLoggedIn) next({ name: fallbackRoute });
-  else if (!mustBeLoggedIn && isUserLoggedIn) next({ name: fallbackRoute });
-  else next();
+  if ((mustBeLoggedIn && !isUserLoggedIn) || (!mustBeLoggedIn && isUserLoggedIn)) {
+    next({ name: fallbackRoute });
+  } else {
+    next();
+  }
 };
 
 let didLoadNotLoggedInViews = false;
@@ -75,7 +77,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/Home/HomeView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
       loadNotLoggedInViews();
     },
@@ -84,7 +86,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/auth',
     name: 'Auth',
     component: () => import('@/views/Auth/AuthView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
       loadNotLoggedInViews();
     },
@@ -93,37 +95,21 @@ const routes: readonly RouteRecordRaw[] = [
         path: 'login',
         name: 'Login',
         component: () => import('@/views/Auth/_components/LoginForm.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-          loadNotLoggedInViews();
-        },
       },
       {
         path: 'register',
         name: 'Register',
         component: () => import('@/views/Auth/_components/RegisterForm.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-          loadNotLoggedInViews();
-        },
       },
       {
         path: 'change-password/:token',
         name: 'ChangePassword',
         component: () => import('@/views/Auth/_components/ChangePasswordForm.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-          loadNotLoggedInViews();
-        },
       },
       {
         path: 'verify-user/:token',
         name: 'VerifyUser',
         component: () => import('@/views/Auth/_components/VerifyUser.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Dashboard', mustBeLoggedIn: false });
-          loadNotLoggedInViews();
-        },
       },
     ],
   },
@@ -160,7 +146,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/DashboardView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
@@ -169,7 +155,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/calendar/:year',
     name: 'Calendar',
     component: () => import('@/views/CalendarView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
@@ -178,7 +164,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/add-expense',
     name: 'AddExpense',
     component: () => import('@/views/AddExpenseView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
@@ -187,7 +173,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/categories',
     name: 'Categories',
     component: () => import('@/views/ManageCategories/ManageCategoriesView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
@@ -196,17 +182,11 @@ const routes: readonly RouteRecordRaw[] = [
         path: ':id',
         name: 'Categories-Category',
         component: () => import('@/views/ManageCategories/_components/ManageCategory.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
-        },
       },
       {
         path: 'add',
         name: 'Categories-AddCategory',
         component: () => import('@/views/ManageCategories/_components/AddCategory.vue'),
-        beforeEnter: (_, __, next) => {
-          validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
-        },
       },
     ],
   },
@@ -214,7 +194,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/years',
     name: 'Years',
     component: () => import('@/views/YearsView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
@@ -223,7 +203,7 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/settings',
     name: 'Settings',
     component: () => import('@/views/SettingsView.vue'),
-    beforeEnter: (_, __, next) => {
+    beforeEnter: (_to, _from, next) => {
       validateUser({ next, fallbackRoute: 'Home', mustBeLoggedIn: true });
       loadLoggedInViews();
     },
