@@ -24,26 +24,18 @@ const currentCategory = ref<ICategory | undefined>();
 watchEffect(async () => {
   categories.value = await categoriesStore.getAll();
 
-  await router.push({
-    name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
-    params: { id: categories.value.length > 0 ? categories.value[0]?.id : undefined },
-  });
+  if (route.fullPath === '/categories') {
+    await router.push({
+      name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
+      params: { id: categories.value.length > 0 ? categories.value[0]?.id : undefined },
+    });
+  }
 
   currentCategory.value = categories.value.find(
     (category: ICategory) => category.id.toString() === route.params.id,
   );
 
   loading.value = false;
-});
-
-// Watches for changes in the current category and navigates to the corresponding category page.
-watchEffect(async () => {
-  if (currentCategory.value) {
-    await router.push({
-      name: 'Categories-Category',
-      params: { id: currentCategory.value.id },
-    });
-  }
 });
 </script>
 

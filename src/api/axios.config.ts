@@ -10,4 +10,13 @@ const axiosOptions: CreateAxiosDefaults = {
 
 const api: AxiosInstance = axios.create(axiosOptions);
 
+// For debugging: add a 2seconds delay to all requests
+// api.interceptors.request.use(config => {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       resolve(config);
+//     }, 1000);
+//   });
+// });
+
 export default api;
