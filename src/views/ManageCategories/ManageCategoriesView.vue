@@ -2,7 +2,7 @@
 import CustomButton from '@/components/CustomButton.vue';
 import AddIcon from '@/components/Icons/add-icon.vue';
 import LoadingIcon from '@/components/Icons/loading-icon.vue';
-import RenderIcon from '@/components/RenderCategoryIcon.vue';
+import RenderCategoryIcon from '@/components/RenderCategoryIcon.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { type ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
@@ -13,7 +13,6 @@ const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const loading = ref<boolean>(true);
 const categories = ref<ICategory[]>([]);
-const currentCategory = ref<ICategory | undefined>();
 
 /**
  * Watch for changes in the categoriesStore.
@@ -73,9 +72,9 @@ watchEffect(async () => {
                   route.name === 'Categories-Category' &&
                   route.params.id === category.id.toString(),
               }"
-              @click="currentCategory = category"
+              @click="route.params.id = category.id.toString()"
             >
-              <RenderIcon :iconId="category.iconId" class="w-6 h-6" />
+              <RenderCategoryIcon :iconId="category.iconId" class="w-6 h-6" />
               <span class="flex-1 text-center truncate">{{ category.name }}</span>
             </RouterLink>
           </li>
@@ -91,7 +90,7 @@ watchEffect(async () => {
               icon-position="left"
               class="shadow-none hover:text-quaternaryColor"
               :class="{ 'text-quaternaryColor': route.name === 'Categories-AddCategory' }"
-              @click="currentCategory = undefined"
+              @click="route.params.id = ''"
             >
               <template v-slot:default>
                 <span> Add Category </span>
@@ -110,13 +109,16 @@ watchEffect(async () => {
           >
             <select
               id="category-select"
-              v-model="currentCategory"
+              v-model="route.params.id"
               class="w-full h-10 px-4 py-2 text-base font-semibold text-center bg-transparent cursor-pointer text-quaternaryColor hover:opacity-80"
+              @change="
+                () => router.push({ name: 'Categories-Category', params: { id: route.params.id } })
+              "
             >
               <option
                 v-for="category in categories"
                 :key="category.id"
-                :value="category"
+                :value="category.id"
                 class="text-septenaryColor"
               >
                 {{ category.name }}
@@ -130,7 +132,7 @@ watchEffect(async () => {
                 :icon="AddIcon"
                 icon-position="left"
                 class="scale-110 shadow-none hover:text-quaternaryColor"
-                @click="currentCategory = undefined"
+                @click="route.params.id = ''"
               >
               </CustomButton>
             </RouterLink>
@@ -146,7 +148,7 @@ watchEffect(async () => {
                 params: { id: categories[0]?.id ?? 0 },
               }"
               :class="{ 'disabled: opacity-50 cursor-default': categories.length === 0 }"
-              @click="currentCategory = categories[0]"
+              @click="categories.length > 0 ? (route.params.id = categories[0].id.toString()) : ''"
             >
               <CustomButton
                 id="show-category-button"
