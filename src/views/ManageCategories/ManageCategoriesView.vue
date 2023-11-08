@@ -31,6 +31,13 @@ watchEffect(async () => {
     });
   }
 
+  // Check if there's a category with the id in the route params.
+  if (!categories.value.some((category: ICategory) => category.id.toString() === route.params.id)) {
+    await router.push({ name: 'Categories-AddCategory' });
+    loading.value = false;
+    return;
+  }
+
   currentCategory.value = categories.value.find(
     (category: ICategory) => category.id.toString() === route.params.id,
   );
