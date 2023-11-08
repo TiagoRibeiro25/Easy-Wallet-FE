@@ -24,23 +24,21 @@ const currentCategory = ref<ICategory | undefined>();
 watchEffect(async () => {
   categories.value = await categoriesStore.getAll();
 
-  if (route.fullPath === '/categories') {
-    await router.push({
-      name: categories.value.length > 0 ? 'Categories-Category' : 'Categories-AddCategory',
-      params: { id: categories.value.length > 0 ? categories.value[0]?.id : undefined },
-    });
-  }
-
   // Check if there's a category with the id in the route params.
-  if (!categories.value.some((category: ICategory) => category.id.toString() === route.params.id)) {
-    await router.push({ name: 'Categories-AddCategory' });
-    loading.value = false;
-    return;
-  }
-
-  currentCategory.value = categories.value.find(
+  const matchingCategory = categories.value.some(
     (category: ICategory) => category.id.toString() === route.params.id,
   );
+
+  // If there's no category with the id in the route params -  redirect to the first category.
+  // If there's no category in the store - redirect to the add category route.
+  if ((!route.params.id && categories.value.length > 0) || matchingCategory) {
+    await router.push({
+      name: 'Categories-Category',
+      params: { id: route.params.id ?? categories.value[0]?.id },
+    });
+  } else {
+    await router.push({ name: 'Categories-AddCategory' });
+  }
 
   loading.value = false;
 });
