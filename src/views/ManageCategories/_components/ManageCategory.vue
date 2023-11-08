@@ -1,25 +1,29 @@
 <script setup lang="ts">
+import CustomInput from '@/components/CustomInput.vue';
 import { useCategoriesStore } from '@/stores/categories';
-import type { ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
-const category = ref<ICategory | undefined>(undefined);
+
+const categoryName = ref<string>('');
 
 watchEffect(() => {
-  const categoryId = route.params.id as string;
-  category.value = categoriesStore.getOne(+categoryId);
+  const category = categoriesStore.getOne(parseInt(route.params.id as string));
+  categoryName.value = category?.name ?? '';
 });
 </script>
 
 <template>
   <div>
-    <p class="text-justify">
-      <span class="block mb-6 truncate">
-        {{ JSON.stringify(category) }}
-      </span>
-    </p>
+    <CustomInput
+      id="category-name"
+      name="category-name"
+      type="text"
+      placeholder="Category name"
+      v-model="categoryName"
+      required
+    />
   </div>
 </template>
