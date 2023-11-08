@@ -41,14 +41,13 @@ html {
   color: #ffffff;
 }
 
-.dark ::selection {
-  background: #ca9908;
-  color: #ffffff;
-}
-
 ::selection {
   background: #e7b008;
-  color: #ffffff;
+  color: #000000;
+}
+
+.dark ::selection {
+  background: #ca9908;
 }
 
 .dark .wrapper::-webkit-scrollbar-thumb {
