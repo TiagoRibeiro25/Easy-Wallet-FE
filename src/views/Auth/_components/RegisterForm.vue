@@ -43,8 +43,9 @@ const handleSubmit = async (): Promise<void> => {
 };
 </script>
 
+<!-- TODO: Fix height on mobile -->
 <template>
-  <div class="h-96">
+  <div class="sm:h-96">
     <h1 class="text-xl text-center">Create an account to start using the app</h1>
 
     <form id="register-form" class="mt-12 space-y-6" @submit.prevent="handleSubmit">

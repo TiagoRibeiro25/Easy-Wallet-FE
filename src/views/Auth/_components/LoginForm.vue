@@ -83,7 +83,7 @@ const handleSubmit = async (): Promise<void> => {
 </script>
 
 <template>
-  <div class="h-96">
+  <div class="sm:h-96">
     <h1 class="text-xl text-center">Log in to your account</h1>
 
     <form id="login-form" class="mt-12 mb-8 space-y-6" @submit.prevent="handleSubmit">
