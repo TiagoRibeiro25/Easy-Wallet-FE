@@ -2,15 +2,50 @@
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { useCategoriesStore } from '@/stores/categories';
+import { useNotificationsStore } from '@/stores/notifications';
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import RenderCategoryIcons from './RenderCategoryIcons.vue';
 
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
+const notificationsStore = useNotificationsStore();
 
 const categoryName = ref<string>('');
 const categoryIconId = ref<number>(0);
+
+const loading = ref<boolean>(false);
+
+/**
+ * Handles the submission of the form to update a category.
+ * Displays a notification with the message "Updating category...".
+ * Calls the categoriesStore updateOne method with the category id, name and icon id.
+ * Displays a notification with the result of the update operation.
+ * @returns {Promise<void>}
+ */
+const handleSubmit = async (): Promise<void> => {
+  loading.value = true;
+
+  notificationsStore.add({
+    type: 'info',
+    title: 'Categories',
+    message: 'Updating category...',
+  });
+
+  const result = await categoriesStore.updateOne(
+    parseInt(route.params.id as string),
+    categoryName.value,
+    categoryIconId.value,
+  );
+
+  notificationsStore.add({
+    type: result.success ? 'success' : 'error',
+    title: 'Categories',
+    message: result.message,
+  });
+
+  loading.value = false;
+};
 
 watchEffect(() => {
   const category = categoriesStore.getOne(parseInt(route.params.id as string));
@@ -20,7 +55,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <RenderCategoryIcons
       :selected-icon-id="categoryIconId"
       @update:selected-icon-id="categoryIconId = $event"
@@ -42,6 +77,7 @@ watchEffect(() => {
         id="update-category"
         name="update-category"
         class="text-quinaryColor bg-quaternaryColor w-[142px] justify-center"
+        :disabled="loading"
       >
         <template v-slot:default> Apply Changes </template>
       </CustomButton>
@@ -51,6 +87,7 @@ watchEffect(() => {
         name="delete-category"
         type="button"
         class="bg-red-400 text-quinaryColor w-[142px] justify-center m-0"
+        :disabled="loading"
       >
         <template v-slot:default> Delete </template>
       </CustomButton>
