@@ -43,7 +43,6 @@ const handleSubmit = async (): Promise<void> => {
 };
 </script>
 
-<!-- TODO: Fix height on mobile -->
 <template>
   <div class="sm:h-96">
     <h1 class="text-xl text-center">Create an account to start using the app</h1>
