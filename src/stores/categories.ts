@@ -64,5 +64,30 @@ export const useCategoriesStore = defineStore('categories', () => {
     }
   };
 
-  return { getAll, getOne, updateOne };
+  /**
+   * Deletes a category with the specified ID.
+   * @param id The ID of the category to delete.
+   * @returns A Promise that resolves to an IAPIResponse object.
+   */
+  const deleteOne = async (id: number): Promise<IAPIResponse> => {
+    try {
+      const res = await requests.categories.deleteCategory(id);
+      if (res.success) {
+        const index = categories.value.findIndex((category: ICategory) => category.id === id);
+        if (index !== -1) {
+          categories.value.splice(index, 1);
+        }
+      }
+
+      return res;
+    } catch (error: any) {
+      return {
+        success: false,
+        message: 'An error occurred while deleting the category.',
+        data: null,
+      };
+    }
+  };
+
+  return { getAll, getOne, updateOne, deleteOne };
 });

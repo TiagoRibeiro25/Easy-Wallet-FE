@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import ConfirmationModal from '@/components/ConfirmationModal.vue';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { useNotificationsStore } from '@/stores/notifications';
 import { ref, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import RenderCategoryIcons from './RenderCategoryIcons.vue';
 
+const router = useRouter();
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const notificationsStore = useNotificationsStore();
@@ -14,6 +16,7 @@ const notificationsStore = useNotificationsStore();
 const categoryName = ref<string>('');
 const categoryIconId = ref<number>(0);
 
+const showModal = ref<boolean>(false);
 const loading = ref<boolean>(false);
 
 /**
@@ -32,19 +35,56 @@ const handleSubmit = async (): Promise<void> => {
     message: 'Updating category...',
   });
 
-  const result = await categoriesStore.updateOne(
+  const res = await categoriesStore.updateOne(
     parseInt(route.params.id as string),
     categoryName.value,
     categoryIconId.value,
   );
 
   notificationsStore.add({
-    type: result.success ? 'success' : 'error',
+    type: res.success ? 'success' : 'error',
     title: 'Categories',
-    message: result.message,
+    message: res.message,
   });
 
   loading.value = false;
+};
+
+/**
+ * Handles the deletion of a category.
+ * Displays a notification with the message "Deleting category...".
+ * Calls the categoriesStore deleteOne method with the category id.
+ * Displays a notification with the result of the delete operation.
+ * If the delete operation was a success, it navigates to the first category (if there is one).
+ * @returns {Promise<void>}
+ */
+const handleDelete = async (): Promise<void> => {
+  loading.value = true;
+
+  notificationsStore.add({
+    type: 'info',
+    title: 'Categories',
+    message: 'Deleting category...',
+  });
+
+  const res = await categoriesStore.deleteOne(parseInt(route.params.id as string));
+
+  notificationsStore.add({
+    type: res.success ? 'success' : 'error',
+    title: 'Categories',
+    message: res.message,
+  });
+
+  loading.value = false;
+
+  // If it was a success, navigate to the first category (if there is one)
+  if (res.success) {
+    const categories = await categoriesStore.getAll();
+
+    if (categories.length > 0) {
+      await router.push({ name: 'Categories-Category', params: { id: categories[0].id } });
+    }
+  }
 };
 
 watchEffect(() => {
@@ -88,9 +128,17 @@ watchEffect(() => {
         type="button"
         class="bg-red-400 text-quinaryColor w-[142px] justify-center m-0"
         :disabled="loading"
+        @click="showModal = true"
       >
         <template v-slot:default> Delete </template>
       </CustomButton>
     </div>
+
+    <ConfirmationModal
+      v-model="showModal"
+      title="Delete Category"
+      text="Are you sure you want to delete this category? This action cannot be undone."
+      @on-confirm="handleDelete"
+    />
   </form>
 </template>

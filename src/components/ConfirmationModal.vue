@@ -2,6 +2,7 @@
 interface IProps {
   modelValue: boolean;
   title: string;
+  text: string;
 }
 </script>
 
@@ -36,7 +37,9 @@ watchEffect(() => {
     :show="showModal"
     @close="() => (showModal = false)"
   >
-    <template v-slot:body> Confirm </template>
+    <template v-slot:body>
+      <p class="text-center">{{ props.text }}</p>
+    </template>
     <template v-slot:footer>
       <div
         class="flex flex-col items-center w-full space-y-5 sm:space-y-0 sm:flex-row sm:justify-evenly"
