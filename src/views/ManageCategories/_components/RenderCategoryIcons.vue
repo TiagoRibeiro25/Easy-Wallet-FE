@@ -36,12 +36,12 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-wrap justify-center max-h-[219px] overflow-y-auto wrapper">
+  <div class="flex flex-wrap justify-center min-h-[47px] max-h-[219px] overflow-y-auto wrapper">
     <RenderCategoryIcon
       v-for="icon in Object.keys(icons)"
       :key="icon"
       :icon-id="getIconId(icon)"
-      class="w-20 h-20 duration-300 scale-50 cursor-pointer transition-scale hover:scale-75"
+      class="m-5 scale-125 cursor-pointer hover:opacity-75"
       :class="{ 'text-quaternaryColor': getIconId(icon) === selectedIcon }"
       @click="handleChange(getIconId(icon))"
     />
