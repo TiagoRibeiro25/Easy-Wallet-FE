@@ -1,4 +1,5 @@
 import requests from '@/api/requests';
+import type { IAddCategoryData } from '@/api/requests/categories/addCategory';
 import type { IAPIResponse } from '@/api/types';
 import { type ICategory } from '@/types';
 import { defineStore } from 'pinia';
@@ -89,5 +90,28 @@ export const useCategoriesStore = defineStore('categories', () => {
     }
   };
 
-  return { getAll, getOne, updateOne, deleteOne };
+  /**
+   * Adds a new category with the given name and icon ID to the list of categories.
+   * @param name The name of the new category.
+   * @param iconId The ID of the icon to use for the new category.
+   * @returns A Promise that resolves to an object containing either the new category data or an error message.
+   */
+  const addOne = async (name: string, iconId: number): Promise<IAddCategoryData | IAPIResponse> => {
+    try {
+      const res = await requests.categories.addCategory(name, iconId);
+      if (res.success) {
+        categories.value.push(res.data);
+      }
+
+      return res;
+    } catch (error: any) {
+      return {
+        success: false,
+        message: 'An error occurred while adding the category.',
+        data: null,
+      };
+    }
+  };
+
+  return { getAll, getOne, updateOne, deleteOne, addOne };
 });
