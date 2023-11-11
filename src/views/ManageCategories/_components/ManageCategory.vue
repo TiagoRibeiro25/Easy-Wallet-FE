@@ -116,7 +116,7 @@ watchEffect(() => {
         type="submit"
         id="update-category"
         name="update-category"
-        class="text-quinaryColor bg-quaternaryColor w-[142px] justify-center"
+        class="text-quinaryColor bg-quaternaryColor w-full sm:w-[142px] justify-center"
         :disabled="loading"
       >
         <template v-slot:default> Apply Changes </template>
@@ -126,7 +126,7 @@ watchEffect(() => {
         id="delete-category"
         name="delete-category"
         type="button"
-        class="bg-red-400 text-quinaryColor w-[142px] justify-center m-0"
+        class="bg-red-400 text-quinaryColor w-full sm:w-[142px] justify-center m-0"
         :disabled="loading"
         @click="showModal = true"
       >
