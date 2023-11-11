@@ -3,6 +3,8 @@ interface IProps {
   modelValue: boolean;
   title: string;
   text: string;
+  confirmText?: string;
+  cancelText?: string;
 }
 </script>
 
@@ -51,7 +53,9 @@ watchEffect(() => {
           @click="handleConfirm"
         >
           <template v-slot:default>
-            <span class="font-medium"> Yes </span>
+            <span class="font-medium">
+              {{ props.confirmText || 'Yes' }}
+            </span>
           </template>
         </CustomButton>
 
@@ -62,7 +66,9 @@ watchEffect(() => {
           @click="() => (showModal = false)"
         >
           <template v-slot:default>
-            <span class="font-medium"> No </span>
+            <span class="font-medium">
+              {{ props.cancelText || 'No' }}
+            </span>
           </template>
         </CustomButton>
       </div>
