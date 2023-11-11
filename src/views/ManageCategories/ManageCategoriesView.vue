@@ -110,7 +110,7 @@ watchEffect(async () => {
             <select
               id="category-select"
               v-model="route.params.id"
-              class="w-full h-10 px-4 py-2 text-base font-semibold text-center bg-transparent cursor-pointer text-quaternaryColor hover:opacity-80"
+              class="w-full h-10 px-4 py-2 text-base font-semibold text-center bg-transparent cursor-pointer text-quaternaryColor hover:opacity-80 focus:outline-none"
               @change="
                 () => router.push({ name: 'Categories-Category', params: { id: route.params.id } })
               "
