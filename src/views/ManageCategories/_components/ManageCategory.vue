@@ -4,6 +4,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { useNotificationsStore } from '@/stores/notifications';
+import type { ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import RenderCategoryIcons from './RenderCategoryIcons.vue';
@@ -12,6 +13,8 @@ const router = useRouter();
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const notificationsStore = useNotificationsStore();
+
+const initialCategory = ref<ICategory | undefined>(undefined);
 
 const categoryName = ref<string>('');
 const categoryIconId = ref<number>(0);
@@ -89,6 +92,8 @@ const handleDelete = async (): Promise<void> => {
 
 watchEffect(() => {
   const category = categoriesStore.getOne(parseInt(route.params.id as string));
+  initialCategory.value = category;
+
   categoryName.value = category?.name ?? '';
   categoryIconId.value = category?.iconId ?? 0;
 });
@@ -116,8 +121,11 @@ watchEffect(() => {
         type="submit"
         id="update-category"
         name="update-category"
-        class="text-quinaryColor bg-quaternaryColor w-full sm:w-[142px] justify-center"
-        :disabled="loading"
+        class="text-quinaryColor bg-quaternaryColor w-full sm:w-[142px] justify-center disabled:opacity-50"
+        :disabled="
+          loading ||
+          (initialCategory?.name === categoryName && initialCategory?.iconId === categoryIconId)
+        "
       >
         <template v-slot:default> Apply Changes </template>
       </CustomButton>
