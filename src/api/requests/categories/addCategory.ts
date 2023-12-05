@@ -1,7 +1,7 @@
 import api from '@/api/axios.config';
 import { type IAPIResponse } from '@/api/types';
-import type { ICategory } from '@/types';
-import type { AxiosResponse } from 'axios';
+import { type ICategory } from '@/types';
+import { type AxiosResponse } from 'axios';
 
 interface IResponse extends IAPIResponse {
   data: {

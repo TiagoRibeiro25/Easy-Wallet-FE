@@ -1,6 +1,6 @@
 import api from '@/api/axios.config';
 import { type IAPIResponse } from '@/api/types';
-import type { AxiosResponse } from 'axios';
+import { type AxiosResponse } from 'axios';
 
 export default async (reset_pw_token: string, new_password: string): Promise<IAPIResponse> => {
   const response: AxiosResponse<IAPIResponse> = await api.patch(

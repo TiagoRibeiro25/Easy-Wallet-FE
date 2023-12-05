@@ -1,5 +1,5 @@
 import { useUserStore } from '@/stores/user';
-import type { NavigationGuardNext, RouteRecordRaw } from 'vue-router';
+import { type NavigationGuardNext, type RouteRecordRaw } from 'vue-router';
 
 interface IValidateUserProps {
   next: NavigationGuardNext;

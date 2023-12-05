@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useNotificationsStore } from '@/stores/notifications';
-import type { INotification } from '@/types';
+import { type INotification } from '@/types';
 import { ref } from 'vue';
 import CloseIcon from './Icons/close-icon.vue';
 

@@ -4,7 +4,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { useNotificationsStore } from '@/stores/notifications';
-import type { ICategory } from '@/types';
+import { type ICategory } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import RenderCategoryIcons from './RenderCategoryIcons.vue';

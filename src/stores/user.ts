@@ -1,6 +1,6 @@
 import { type IAPIResponse } from '@/api/types';
 import { isEmailValid, isPasswordValid } from '@/lib/validateData';
-import type { IUser } from '@/types';
+import { type IUser } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import requests from '../api/requests/index';

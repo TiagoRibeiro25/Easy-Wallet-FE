@@ -1,6 +1,6 @@
 import requests from '@/api/requests';
-import type { IAddCategoryData } from '@/api/requests/categories/addCategory';
-import type { IAPIResponse } from '@/api/types';
+import { type IAddCategoryData } from '@/api/requests/categories/addCategory';
+import { type IAPIResponse } from '@/api/types';
 import { type ICategory } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
