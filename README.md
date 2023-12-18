@@ -94,7 +94,7 @@ In order to run this project, you need to have installed
 
 3. Create a .env file, add the variables in the .env.example file and fill them with your own values.
 
-4. Have the [back end](https://github.com/TiagoRibeiro25/Easy-Wallet-FE.git) running locally or in a server
+4. Have the [back end](https://github.com/TiagoRibeiro25/Easy-Wallet-BE.git) running locally or in a server
 
 5. Run the project
 
